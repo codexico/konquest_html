@@ -1,10 +1,9 @@
 import {game} from '../main';
 
+// todo: use x,y to calculate near planets
 function chooseDestiny(planet) {
-  // todo: use x,y to calculate near planets
-
   // atack next planet
-  let nextPlanet = planet.position + 1;
+  let nextPlanet = game.planets.indexOf(planet) + 1;
   if (nextPlanet === game.planets.length) {
     nextPlanet = 0;
   }

@@ -9,14 +9,21 @@ function addPlanetName(planetEl) {
   return planetEl;
 }
 
+function production() {
+  let minProduction = defaults.production / 2;
+  let randomProduction = Math.floor(Math.random() * defaults.production);
+
+  return minProduction + randomProduction;
+}
+
 // todo: kill percent
 function createPlanet() {
   let planet = document.createElement('span');
+
+  planet.production = production();
   planet.className = 'planet';
   planet = addPlanetName(planet);
-  planet.production = 5 + Math.ceil(Math.random() * 10);
-  // position needed to calculate attacks while dont use x,y
-  planet.position = game.planets.length;
+
   game.planets.push(planet);
   return planet;
 }
@@ -56,7 +63,7 @@ function validate(numberOfPlanets) {
   if (error && (game.spaces.length >= defaults.players) ) {
     return game.spaces.length;
   }
-  
+
   return error ? false : numberOfPlanets;
 }
 
