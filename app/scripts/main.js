@@ -5,6 +5,7 @@ import * as utils from './modules/utils';
 
 export let game = {
   turn: 0,
+  planets: [],
   fleets: []
 };
 export let defaults = {

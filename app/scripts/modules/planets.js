@@ -9,27 +9,37 @@ function addPlanetName(planetEl) {
   return planetEl;
 }
 
+// todo: kill percent
 function createPlanet() {
   let planet = document.createElement('span');
   planet.className = 'planet';
   planet = addPlanetName(planet);
   planet.production = 5 + Math.ceil(Math.random() * 10);
-  // todo: kill percent
+  // position needed to calculate attacks while dont use x,y
+  planet.position = game.planets.length;
   game.planets.push(planet);
-  planet.position = game.planets.length - 1;
   return planet;
 }
 
-function randomAddPlanet(space) {
-  if (Math.random() < defaults.density) {
-    let planet = createPlanet();
-    space.appendChild(planet);
-    planet.space = space;
-    space.planet = planet;
+function getEmptySpace() {
+  let space = game.spaces[Math.floor(Math.random() * game.spaces.length)];
+  if (!space.planet) {
+    return space;
   }
+  // try again
+  return getEmptySpace();
+}
+
+function locatePlanet(planet) {
+  let space = getEmptySpace();
+  space.appendChild(planet);
+  planet.space = space;
+  space.planet = planet;
 }
 
 export function addPlanets() {
-  game.planets = [];
-  game.spaces.forEach(randomAddPlanet);
+  let numberOfPlanets = Math.round(game.spaces.length * defaults.density);
+  for (var i = 0; i < numberOfPlanets; i++) {
+    locatePlanet(createPlanet());
+  }
 }

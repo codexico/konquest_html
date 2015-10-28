@@ -18,7 +18,7 @@ TODO
   - options (to override defaults)
     - planets
     - map size
-    - number of planets not random
+    - number of planets not random x
 
 Bugs
 ----
