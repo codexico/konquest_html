@@ -1,4 +1,6 @@
 import {game, defaults} from '../main';
+import { getEmptySpace } from './spaces';
+import { calcRandomProduction } from './utils';
 
 function addPlanetName(planetEl) {
   planetEl.name = 'p' + game.planets.length;
@@ -9,32 +11,16 @@ function addPlanetName(planetEl) {
   return planetEl;
 }
 
-function production() {
-  let minProduction = defaults.production / 2;
-  let randomProduction = Math.floor(Math.random() * defaults.production);
-
-  return minProduction + randomProduction;
-}
-
 // todo: kill percent
 function createPlanet() {
   let planet = document.createElement('span');
 
-  planet.production = production();
+  planet.production = calcRandomProduction();
   planet.className = 'planet';
   planet = addPlanetName(planet);
 
   game.planets.push(planet);
   return planet;
-}
-
-function getEmptySpace() {
-  let space = game.spaces[Math.floor(Math.random() * game.spaces.length)];
-  if (!space.planet) {
-    return space;
-  }
-  // try again
-  return getEmptySpace();
 }
 
 function locatePlanet(planet) {

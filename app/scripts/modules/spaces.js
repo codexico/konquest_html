@@ -16,3 +16,12 @@ export function addSpaces() {
     game.universe.appendChild(space);
   });
 }
+
+export function getEmptySpace() {
+  let space = game.spaces[Math.floor(Math.random() * game.spaces.length)];
+  if (!space.planet) {
+    return space;
+  }
+  // try again
+  return getEmptySpace();
+}

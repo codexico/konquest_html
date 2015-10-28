@@ -1,4 +1,11 @@
-import {game} from '../main';
+import {game, defaults} from '../main';
+
+export function calcRandomProduction() {
+  let minProduction = defaults.production / 2;
+  let randomProduction = Math.floor(Math.random() * defaults.production);
+
+  return minProduction + randomProduction;
+}
 
 export function score() {
   game.players.forEach(function (player) {
