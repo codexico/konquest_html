@@ -37,9 +37,33 @@ function locatePlanet(planet) {
   space.planet = planet;
 }
 
+function validate(numberOfPlanets) {
+  let error = false;
+  if (numberOfPlanets < defaults.players) {
+    console.error('numberOfPlanets < defaults.players');
+    error = true;
+  }
+  if (game.spaces.length < defaults.players) {
+    console.error('game.spaces.length < defaults.players');
+    error = true;
+  }
+
+  // try to fix
+  if (numberOfPlanets > game.spaces.length) {
+    console.error('numberOfPlanets > game.spaces.length');
+    return game.spaces.length;
+  }
+  if (error && (game.spaces.length >= defaults.players) ) {
+    return game.spaces.length;
+  }
+  
+  return error ? false : numberOfPlanets;
+}
+
 export function addPlanets() {
-  let numberOfPlanets = Math.round(game.spaces.length * defaults.density);
-  for (var i = 0; i < numberOfPlanets; i++) {
+  let planets = validate(Math.round(game.spaces.length * defaults.density));
+
+  for (var i = 0; i < planets; i++) {
     locatePlanet(createPlanet());
   }
 }

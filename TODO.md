@@ -23,4 +23,4 @@ TODO
 Bugs
 ----
 
-- verify if number of planets is bigger than number of players
+- verify if number of planets is bigger than number of players x
