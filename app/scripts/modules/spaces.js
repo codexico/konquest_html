@@ -1,7 +1,6 @@
 import {game} from '../main';
 
 function createSpaces() {
-  game.spaces = [];
   let spaceEl = document.createElement('span');
   spaceEl.className = 'space';
 

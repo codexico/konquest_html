@@ -32,7 +32,6 @@ function addPlayer() {
 }
 
 export function addPlayers() {
-  game.players = [];
   for (var i = 0; i < defaults.players; i++) {
     addPlayer();
   }
