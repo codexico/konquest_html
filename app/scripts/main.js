@@ -1,7 +1,21 @@
-import {game, defaults, ui} from './modules/game';
 import * as universe from './modules/universe';
 import * as players from './modules/players';
 import * as fleets from './modules/fleets';
+import * as utils from './modules/utils';
+
+export let game = {
+  turn: 0,
+  fleets: []
+};
+export let defaults = {
+  rows: 9,
+  cols: 7,
+  density: 0.2,
+  players: 3,
+  ships: 10,
+  production: 10
+};
+export let ui = {};
 
 function endTurn() {
   game.turn++;
@@ -9,13 +23,13 @@ function endTurn() {
     if (planet.player) {
       planet.ships += planet.production;
       // send fleet
-      createFleet(planet);
+      fleets.createFleet(planet);
     }
   });
 
   // todo: verify if is turn of arrival, for now all the fleets use wormholes
   // all the fleets arrive every turn
-  game.fleets.forEach(arrive);
+  game.fleets.forEach(fleets.arrive);
   game.fleets = [];
   utils.score();
 }

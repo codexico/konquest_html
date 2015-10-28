@@ -1,4 +1,4 @@
-import {game, defaults, ui} from './game';
+import {game, defaults, ui} from '../main';
 import * as planets from './planets';
 import * as spaces from './spaces';
 

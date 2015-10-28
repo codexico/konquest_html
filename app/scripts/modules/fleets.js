@@ -1,4 +1,4 @@
-import {game, defaults, ui} from './game';
+import {game} from '../main';
 
 function chooseDestiny(planet) {
   // todo: use x,y to calculate near planets
@@ -11,7 +11,7 @@ function chooseDestiny(planet) {
   return game.planets[nextPlanet];
 }
 
-function createFleet(planet) {
+export function createFleet(planet) {
     // todo: better and others algorithms
   let fleet = {};
   if (planet.ships > (10 + (game.turn * 2))) {
@@ -43,7 +43,7 @@ function battle(fleet) {
   }
 }
 
-function arrive(fleet) {
+export function arrive(fleet) {
   if (!fleet.destiny.ships) {
     console.log('empty planet');
     fleet.destiny.space.classList.add(fleet.player.name);

@@ -1,4 +1,4 @@
-import {game, defaults, ui} from './game';
+import {game} from '../main';
 
 function createSpaces() {
   game.spaces = [];

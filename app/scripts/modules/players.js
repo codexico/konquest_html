@@ -1,4 +1,4 @@
-import {game, defaults, ui} from './game';
+import {game, defaults} from '../main';
 
 function createLife(planet, player) {
   planet.space.classList.add(player.name);

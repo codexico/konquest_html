@@ -1,4 +1,4 @@
-import {game, defaults, ui} from './game';
+import {game} from '../main';
 
 export function score() {
   game.players.forEach(function (player) {

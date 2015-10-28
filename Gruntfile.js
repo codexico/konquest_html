@@ -42,7 +42,7 @@ module.exports = function (grunt) {
       // },
       browserify: {
         files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['browserify:dist']
+        tasks: ['newer:eslint', 'browserify:dist']
       },
       babelTest: {
         files: ['test/spec/{,*/}*.js'],
@@ -389,6 +389,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+      'eslint',
       'concurrent:server',
       'postcss',
       'browserSync:livereload',

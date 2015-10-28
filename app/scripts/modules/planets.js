@@ -1,4 +1,4 @@
-import {game, defaults, ui} from './game';
+import {game, defaults} from '../main';
 
 function addPlanetName(planetEl) {
   planetEl.name = 'p' + game.planets.length;
