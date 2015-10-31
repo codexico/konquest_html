@@ -1,4 +1,5 @@
 import {game, defaults} from '../main';
+import {getEmptyPlanet} from './planets';
 
 function createLife(planet, player) {
   planet.space.classList.add(player.name);
@@ -18,14 +19,6 @@ function createPlayer() {
   return game.players[game.players.length - 1];
 }
 
-function getEmptyPlanet() {
-  let planet = game.planets[Math.floor(Math.random() * game.planets.length)];
-  if (!planet.ships) {
-    return planet;
-  }
-  // try again
-  return getEmptyPlanet();
-}
 
 function addPlayer() {
   createLife(getEmptyPlanet(), createPlayer());
