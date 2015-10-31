@@ -14,7 +14,7 @@ export let defaults = {
   rows: 9,
   cols: 7,
   density: 0.2,
-  players: 3,
+  players: 5,
   ships: 10,
   production: 10
 };
@@ -22,6 +22,7 @@ export let ui = {};
 
 function endTurn() {
   game.turn++;
+  console.groupCollapsed('turn ', game.turn);
   game.planets.forEach(function production(planet) {
     if (planet.player) {
       planet.ships += planet.production;
@@ -29,11 +30,12 @@ function endTurn() {
       fleets.createFleet(planet);
     }
   });
-
+  console.log('game.fleets', game.fleets);
   // todo: verify if is turn of arrival, for now all the fleets use wormholes
   // all the fleets arrive every turn
   game.fleets.forEach(fleets.arrive);
   game.fleets = [];
+  console.groupEnd();
   utils.score();
 }
 
