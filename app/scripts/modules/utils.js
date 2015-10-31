@@ -7,18 +7,41 @@ export function calcRandomProduction() {
   return minProduction + randomProduction;
 }
 
+function end() {
+  game.players.forEach(function (player) {
+    if (player.planets.length) {
+      console.info(player.name, 'is the winner!');
+    }
+  });
+}
+
 export function score() {
+  console.group();
+  let dead = 0;
+  let countTotalPlanets = 0;
   game.players.forEach(function (player) {
     let ships = 0;
     let production = 0;
     player.planets.forEach(function (planet) {
       ships += planet.ships;
       production += planet.production;
+      countTotalPlanets++;
     });
-    console.log(player.name,
-      'planets =', player.planets.length,
-      'ships =', ships,
-      'production =', production
-    );
+
+    if (!player.planets.length) {
+      console.log(player.name, 'is dead :(');
+      dead++;
+    } else {
+      console.log(player.name,
+        'planets =', player.planets.length,
+        'ships =', ships,
+        'production =', production
+      );
+    }
   });
+
+  if (game.players.length - dead === 1) {
+    end();
+  }
+  console.groupEnd();
 }
