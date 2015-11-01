@@ -23,40 +23,63 @@ export function createFleet(planet) {
   return false;
 }
 
-function fleetWin(fleet) {
-  console.info('fleetwin');
-  fleet.destiny.space.classList.remove(fleet.destiny.player.name);
-  fleet.destiny.space.classList.add(fleet.player.name);
-  fleet.destiny.ships = fleet.ships - fleet.destiny.ships;
-  fleet.destiny.player.planets.pop(fleet.destiny);
-  fleet.destiny.player = fleet.player;
-  fleet.player.planets.push(fleet.destiny);
+function konquerPlanet(fleet) {
+  let planetIndex = game.planets.indexOf(fleet.destiny);
+  let planet = game.planets[planetIndex];
+  let fleetPlayerIndex = game.players.indexOf(fleet.player);
+  let fleetPlayer = game.players[fleetPlayerIndex];
+  let oldPlayerIndex = game.players.indexOf(fleet.destiny.player);
+  let oldPlayer = game.players[oldPlayerIndex];
+
+  planet.space.className = 'space';
+  planet.space.classList.add(fleet.player.name);
+  planet.player = fleetPlayer;
+
+  oldPlayer.planets.pop(planet);
+  fleetPlayer.planets.push(planet);
+
+  planet.ships = fleet.ships;
+}
+
+function occupyPlanet(fleet) {
+  console.log('empty planet', fleet, fleet.destiny);
+  let planetIndex = game.planets.indexOf(fleet.destiny);
+  let fleetPlayerIndex = game.players.indexOf(fleet.player);
+
+  game.planets[planetIndex].space.classList.add(fleet.player.name);
+  game.planets[planetIndex].player = game.players[fleetPlayerIndex];
+  game.players[fleetPlayerIndex].planets.push(game.planets[planetIndex]);
+  game.planets[planetIndex].ships = fleet.ships;
 }
 
 function battle(fleet) {
-  if (fleet.destiny.ships > fleet.ships) {
-    console.info('survive');
-    fleet.destiny.ships -= fleet.ships;
-  } else {
-    fleetWin(fleet);
+  // console.log('BATTLE');
+  // console.log('defense=', fleet.destiny.ships, 'atack=', fleet.ships);
+  let planetIndex = game.planets.indexOf(fleet.destiny);
+  let planet = game.planets[planetIndex];
+
+  if (planet.ships >= fleet.ships) { // defense win
+    planet.ships -= fleet.ships;
+  } else { // attack win
+    fleet.ships -= planet.ships;
+    konquerPlanet(fleet);
   }
 }
 
+function reinforcements(planet, ships) {
+  // console.log('reinforcements', planet, ships);
+  planet.ships += ships;
+}
+
 export function arrive(fleet) {
-  if (!fleet.destiny.ships) {
-    console.log('empty planet');
-    fleet.destiny.space.classList.add(fleet.player.name);
-    fleet.destiny.ships = fleet.ships;
-    fleet.destiny.player = fleet.player;
-    fleet.player.planets.push(fleet.destiny);
-  } else if (fleet.player === fleet.destiny.player) {
-    console.log('reinforcements');
-    fleet.destiny.ships += fleet.ships;
+  let planetIndex = game.planets.indexOf(fleet.destiny);
+  let destinyPlanet = game.planets[planetIndex];
+
+  if (!destinyPlanet.player) {
+    occupyPlanet(fleet);
+  } else if (fleet.player === destinyPlanet.player) {
+    reinforcements(destinyPlanet, fleet.ships);
   } else {
-    console.log('Battle: defense=',
-      fleet.destiny.ships,
-      'atack=',fleet.ships
-    );
     battle(fleet);
   }
 }
