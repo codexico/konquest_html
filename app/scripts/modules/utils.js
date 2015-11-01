@@ -1,5 +1,19 @@
 import {game, defaults} from '../main';
 
+function nextPlanet(planet) {
+  // todo: use x,y to calculate near planets
+  let nextPlanet = game.planets.indexOf(planet) + 1;
+  if (nextPlanet === game.planets.length) {
+    nextPlanet = 0;
+  }
+  return game.planets[nextPlanet];
+}
+
+export function chooseDestiny(planet) {
+  // todo: more and better algorithms
+  return nextPlanet(planet);
+}
+
 export function calcRandomProduction() {
   let minProduction = defaults.production / 2;
   let randomProduction = Math.floor(Math.random() * defaults.production);
