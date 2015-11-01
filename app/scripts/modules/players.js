@@ -1,5 +1,5 @@
-import {game, defaults} from '../main';
-import {getEmptyPlanet} from './planets';
+import { game, defaults } from '../main';
+import { getEmptyPlanet } from './planets';
 
 function createLife(planet, player) {
   planet.space.classList.add(player.name);
@@ -10,7 +10,6 @@ function createLife(planet, player) {
   player.planets.push(planet);
 }
 
-// players
 function createPlayer() {
   let player = document.createElement('span');
   player.name = 'player_' + game.players.length;
@@ -18,7 +17,6 @@ function createPlayer() {
   game.players.push(player);
   return game.players[game.players.length - 1];
 }
-
 
 function addPlayer() {
   createLife(getEmptyPlanet(), createPlayer());

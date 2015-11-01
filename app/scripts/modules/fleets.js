@@ -1,4 +1,4 @@
-import {game} from '../main';
+import { game } from '../main';
 import { chooseDestiny } from './utils';
 
 export function createFleet(planet) {

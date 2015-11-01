@@ -1,4 +1,4 @@
-import {game} from '../main';
+import { game } from '../main';
 
 function createSpaces() {
   let spaceEl = document.createElement('span');

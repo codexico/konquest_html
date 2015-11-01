@@ -1,4 +1,4 @@
-import {game, defaults} from '../main';
+import { game, defaults } from '../main';
 
 function nextPlanet(planet) {
   // todo: use x,y to calculate near planets

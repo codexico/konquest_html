@@ -1,11 +1,11 @@
-import {game, defaults} from '../main';
+import { game, defaults } from '../main';
 import { getEmptySpace } from './spaces';
 import { calcRandomProduction } from './utils';
 
 export function getEmptyPlanet() {
   let planetIndex = Math.floor(Math.random() * game.planets.length);
   let planet = game.planets[planetIndex];
-  
+
   if (!planet.player) {
     return planet;
   }
