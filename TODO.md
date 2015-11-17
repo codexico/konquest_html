@@ -1,9 +1,9 @@
 TODO
 ----
 
-- map x
-  - terrain x
-  - planets x
+- ~~map~~
+  - ~~terrain~~
+  - ~~planets~~
   - ships
 
 - players
@@ -11,16 +11,16 @@ TODO
   - human
 
 - randomize
-  - terrain x
-  - planets
+  - ~~terrain~~
+  - ~~planets~~
 
 - control game start
   - options (to override defaults)
     - planets
     - map size
-    - number of planets not random x
+    - ~~number of planets not random~~
 
 Bugs
 ----
 
-- verify if number of planets is bigger than number of players x
+- ~~verify if number of planets is bigger than number of players~~
