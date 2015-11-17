@@ -1,0 +1,15 @@
+- Player name: Select source planet...
+- Standing order (checkbox, unchecked)
+- Input number
+- Button End Turn
+- Map
+- Messages Box
+  - Top Bar
+    - right click
+      - Messages (checkbox, checked)
+      - Standings (checkbox, unchecked)
+      - Main Toolbar (checkbox, checked)
+  - Button go to front
+    - click: go to front
+  - Button Close
+- Turn Number
