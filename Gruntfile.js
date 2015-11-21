@@ -21,7 +21,8 @@ module.exports = function (grunt) {
   // Configurable paths
   var config = {
     app: 'app',
-    dist: 'dist'
+    dist: 'dist',
+    tmp: '.tmp'
   };
 
   // Define the configuration for all the tasks
@@ -356,6 +357,17 @@ module.exports = function (grunt) {
             'styles/fonts/{,*/}*.*'
           ]
         }]
+      },
+      js: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= config.tmp %>',
+          dest: '<%= config.dist %>',
+          src: [
+            'scripts/main.js',
+          ]
+        }]
       }
     },
 
@@ -426,7 +438,7 @@ module.exports = function (grunt) {
     'concat',
     'cssmin',
     // 'uglify', // uglify dont support es6
-    'copy:dist',
+    'copy',
     'filerev',
     'usemin',
     'htmlmin'
