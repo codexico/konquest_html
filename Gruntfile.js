@@ -365,7 +365,7 @@ module.exports = function (grunt) {
           cwd: '<%= config.tmp %>',
           dest: '<%= config.dist %>',
           src: [
-            'scripts/main.js',
+            'scripts/main.js'
           ]
         }]
       }
@@ -432,15 +432,14 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
-    'useminPrepare',
+    // 'useminPrepare',
     'concurrent:dist',
     'postcss',
-    'concat',
-    'cssmin',
+    // 'concat',
+    // 'cssmin',
     // 'uglify', // uglify dont support es6
     'copy',
-    'filerev',
-    'usemin',
+    // 'usemin',
     'htmlmin'
   ]);
 
