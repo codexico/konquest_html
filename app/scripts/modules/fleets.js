@@ -1,17 +1,23 @@
 import { game } from '../main';
 import { chooseDestiny } from './utils';
 
+function generateFleet(planet) {
+  let fleet = {};
+  fleet.ships = Math.round(Math.random() * planet.ships);
+  fleet.destiny = chooseDestiny(planet);
+  fleet.player = planet.player;
+  return fleet;
+}
+
 export function createFleet(planet) {
     // todo: better and others algorithms
   let fleet = {};
   if (planet.ships > (10 + (game.turn * 2))) {
-    fleet.ships = Math.round(Math.random() * planet.ships);
+    fleet = generateFleet(planet);
     planet.ships -= fleet.ships;
-    fleet.destiny = chooseDestiny(planet);
-    fleet.player = planet.player;
     game.fleets.push(fleet);
   }
-  return false;
+  return fleet;
 }
 
 function konquerPlanet(fleet) {
