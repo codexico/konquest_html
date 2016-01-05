@@ -34,24 +34,30 @@ function isOcuppied(planet) {
   return planet.player;
 }
 
-function endTurn() {
-  game.turn++;
-
-  console.groupCollapsed('turn ', game.turn);
-
+function prepateTurn() {
   game.planets
     .filter(isOcuppied)
     .map(grow)
     .filter(wishToSendFleet)
     .map(fleets.createFleet);
+}
 
-  console.log('game.fleets', game.fleets);
-
+function executeTurn() {
   // todo: verify if is turn of arrival, for now all the fleets use wormholes
   // all the fleets arrive every turn
   game.fleets.forEach(fleets.arrive);
   game.fleets = [];
+}
+
+function endTurn() {
+  game.turn++;
+
+  console.groupCollapsed('turn ', game.turn);
+  prepateTurn();
+  console.log('game.fleets', game.fleets);
+  executeTurn();
   console.groupEnd();
+  
   utils.score();
 }
 
