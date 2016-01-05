@@ -10,13 +10,9 @@ function generateFleet(planet) {
 }
 
 export function createFleet(planet) {
-    // todo: better and others algorithms
-  let fleet = {};
-  if (planet.ships > (10 + (game.turn * 2))) {
-    fleet = generateFleet(planet);
-    planet.ships -= fleet.ships;
-    game.fleets.push(fleet);
-  }
+  let fleet = generateFleet(planet);
+  planet.ships -= fleet.ships;
+  game.fleets.push(fleet);
   return fleet;
 }
 

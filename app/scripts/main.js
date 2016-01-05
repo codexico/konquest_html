@@ -20,17 +20,33 @@ export let defaults = {
 };
 export let ui = {};
 
+function grow(planet) {
+  planet.ships += planet.production;
+  return planet;
+}
+
+function wishToSendFleet(planet) {
+  // todo: better and others algorithms
+  return planet.ships > (10 + (game.turn * 2));
+}
+
+function isOcuppied(planet) {
+  return planet.player;
+}
+
 function endTurn() {
   game.turn++;
+
   console.groupCollapsed('turn ', game.turn);
-  game.planets.forEach(function production(planet) {
-    if (planet.player) {
-      planet.ships += planet.production;
-      // send fleet
-      fleets.createFleet(planet);
-    }
-  });
+
+  game.planets
+    .filter(isOcuppied)
+    .map(grow)
+    .filter(wishToSendFleet)
+    .map(fleets.createFleet);
+
   console.log('game.fleets', game.fleets);
+
   // todo: verify if is turn of arrival, for now all the fleets use wormholes
   // all the fleets arrive every turn
   game.fleets.forEach(fleets.arrive);
