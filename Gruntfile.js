@@ -91,12 +91,13 @@ module.exports = function (grunt) {
         options: {
           port: 9001,
           open: false,
-          logLevel: 'silent',
+          logLevel: 'verbose',
           host: 'localhost',
           server: {
             baseDir: ['.tmp', './test', config.app],
             routes: {
-              '/bower_components': './bower_components'
+              '/bower_components': './bower_components',
+              '/dist': './dist'
             }
           }
         }
@@ -136,9 +137,12 @@ module.exports = function (grunt) {
 
     // Mocha testing framework configuration options
     mocha: {
+      options: {
+        log: true,
+        run: true
+      },
       all: {
         options: {
-          run: true,
           urls: ['http://<%= browserSync.test.options.host %>:<%= browserSync.test.options.port %>/index.html']
         }
       }
