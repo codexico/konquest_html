@@ -18,6 +18,7 @@ export function initUniverse() {
 export function bigBang() {
   let singularity = document.querySelectorAll('.singularity');
   let spaceWidth = singularity[0].offsetWidth;
-  singularity[0].remove();
+  // singularity[0].remove();
+  singularity[0].parentNode.removeChild(singularity[0]);
   ui.map.style.width = (spaceWidth * defaults.cols) + 'px';
 }
