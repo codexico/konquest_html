@@ -12,20 +12,16 @@
       expect(map).to.exist;
     });
     it('should not have singularity',function(){
-      setTimeout(function () {
-        let singularity = document.getElementsByClassName('singularity');
-        expect(singularity).to.be.empty;
-      }, 10);
+      let singularity = document.getElementsByClassName('singularity');
+      expect(singularity.length).to.equal(0);
     });
     it('should have universe',function(){
       let universe = document.getElementsByClassName('universe');
       expect(universe).to.exist;
     });
     it('should have planets',function(){
-      setTimeout(function () {
-        let planets = document.getElementsByClassName('planet');
-        expect(planets.length).to.be.at.least(1);
-      }, 10);
+      let planets = document.getElementsByClassName('planet');
+      expect(planets.length).to.be.at.least(1);
     });
   }); // homepage
 
