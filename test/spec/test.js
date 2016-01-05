@@ -1,4 +1,5 @@
-;(function () {
+/*global assert, expect*/
+(function () {
   'use strict';
 
   describe('homepage', function(){
@@ -14,7 +15,7 @@
       setTimeout(function () {
         let singularity = document.getElementsByClassName('singularity');
         expect(singularity).to.be.empty;
-        }, 10);
+      }, 10);
     });
     it('should have universe',function(){
       let universe = document.getElementsByClassName('universe');
