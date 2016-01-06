@@ -1,18 +1,18 @@
-import { game, defaults, ui } from '../main';
+import { state, defaults, ui } from '../main';
 import * as planets from './planets';
 import * as spaces from './spaces';
 
 export function createUniverse() {
   let universeEl = document.createElement('div');
   universeEl.className = 'universe';
-  game.universe = universeEl;
+  state.universe = universeEl;
 }
 
 export function initUniverse() {
   createUniverse();
   spaces.addSpaces();
   planets.addPlanets();
-  ui.map.appendChild(game.universe);
+  ui.map.appendChild(state.universe);
 }
 
 export function bigBang() {
