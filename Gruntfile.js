@@ -43,14 +43,20 @@ module.exports = function (grunt) {
       // },
       browserify: {
         files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:eslint', 'browserify:dist']
+        tasks: [
+          'newer:eslint',
+          'browserify:dist',
+          'browserSync:test',
+          'mocha'
+        ]
       },
       babelTest: {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['babel:test', 'test:watch']
       },
       gruntfile: {
-        files: ['Gruntfile.js']
+        files: ['Gruntfile.js'],
+        tasks: ['newer:eslint']
       },
       sass: {
         files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
@@ -383,6 +389,7 @@ module.exports = function (grunt) {
         'sass'
       ],
       test: [
+        'eslint',
         'babel'
       ],
       dist: [
