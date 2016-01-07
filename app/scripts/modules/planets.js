@@ -48,41 +48,41 @@ function createPlanet() {
   return planet;
 }
 
-function locatePlanet(planet) {
-  let space = getEmptySpace(state.spaces);
+function locatePlanet(allSpaces, planet) {
+  let space = getEmptySpace(allSpaces);
   space.appendChild(planet);
   planet.space = space;
   space.planet = planet;
 }
 
-function validate(numberOfPlanets) {
+function validate(allSpaces, numberOfPlanets) {
   let error = false;
   if (numberOfPlanets < options.players) {
     console.error('numberOfPlanets < options.players');
     error = true;
   }
-  if (state.spaces.length < options.players) {
-    console.error('state.spaces.length < options.players');
+  if (allSpaces.length < options.players) {
+    console.error('allSpaces.length < options.players');
     error = true;
   }
 
   // try to fix
-  if (numberOfPlanets > state.spaces.length) {
-    console.error('numberOfPlanets > state.spaces.length');
-    return state.spaces.length;
+  if (numberOfPlanets > allSpaces.length) {
+    console.error('numberOfPlanets > allSpaces.length');
+    return allSpaces.length;
   }
-  if (error && (state.spaces.length >= options.players) ) {
-    return state.spaces.length;
+  if (error && (allSpaces.length >= options.players) ) {
+    return allSpaces.length;
   }
 
   return error ? false : numberOfPlanets;
 }
 
-export function addPlanets() {
-  let numberOfPlanets = Math.round(state.spaces.length * options.density);
-  let planets = validate(numberOfPlanets);
+export function addPlanets(allSpaces) {
+  let numberOfPlanets = Math.round(allSpaces.length * options.density);
+  let planets = validate(allSpaces, numberOfPlanets);
 
   for (var i = 0; i < planets; i++) {
-    locatePlanet(createPlanet());
+    locatePlanet(allSpaces, createPlanet());
   }
 }

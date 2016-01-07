@@ -6,26 +6,27 @@ function createSpace() {
 
 function createSpaces(total) {
   let spaceEl = createSpace();
-  let spaces = [];
+  let allSpaces = [];
 
   for (var i = 0; i < total; i++) {
-    spaces.push(spaceEl.cloneNode());
+    allSpaces.push(spaceEl.cloneNode());
   }
-  return spaces;
+  return allSpaces;
 }
 
-export function addSpaces(state, total) {
-  state.spaces = createSpaces(total);
-  state.spaces.map( (space) => {
-    state.universe.appendChild(space);
+export function addSpaces(universeEl, size) {
+  let allSpaces = createSpaces(size);
+  allSpaces.map( (space) => {
+    universeEl.appendChild(space);
   });
+  return allSpaces;
 }
 
-export function getEmptySpace(spaces) {
-  let space = spaces[Math.floor(Math.random() * spaces.length)];
+export function getEmptySpace(allSpaces) {
+  let space = allSpaces[Math.floor(Math.random() * allSpaces.length)];
   if (!space.planet) {
     return space;
   }
   // try again
-  return getEmptySpace(spaces);
+  return getEmptySpace(allSpaces);
 }

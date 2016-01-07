@@ -50,7 +50,7 @@ function initOptions() {
   ui = initUI();
 
   universe.bigBang(ui, options);
-  universe.initUniverse(ui, state, options);
+  universe.initUniverse(ui, options);
   players.addPlayers();
   ui.listeners = initListeners(ui);
 }());
