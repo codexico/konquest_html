@@ -1,10 +1,10 @@
-import { state, defaults } from '../main';
+import { state, options } from '../main';
 import { getEmptyPlanet } from './planets';
 
 function createLife(planet, player) {
   planet.space.classList.add(player.name);
-  planet.ships = defaults.ships;
-  planet.production = defaults.production; // override random production
+  planet.ships = options.ships;
+  planet.production = options.production; // override random production
   planet.player = player;
   player.planets = [];
   player.planets.push(planet);
@@ -23,7 +23,7 @@ function addPlayer() {
 }
 
 export function addPlayers() {
-  for (var i = 0; i < defaults.players; i++) {
+  for (var i = 0; i < options.players; i++) {
     addPlayer();
   }
 }

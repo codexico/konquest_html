@@ -1,4 +1,4 @@
-import { state, defaults } from '../main';
+import { state, options } from '../main';
 import { getEmptySpace } from './spaces';
 import { calcRandomProduction } from './utils';
 
@@ -49,7 +49,7 @@ function createPlanet() {
 }
 
 function locatePlanet(planet) {
-  let space = getEmptySpace();
+  let space = getEmptySpace(state.spaces);
   space.appendChild(planet);
   planet.space = space;
   space.planet = planet;
@@ -57,12 +57,12 @@ function locatePlanet(planet) {
 
 function validate(numberOfPlanets) {
   let error = false;
-  if (numberOfPlanets < defaults.players) {
-    console.error('numberOfPlanets < defaults.players');
+  if (numberOfPlanets < options.players) {
+    console.error('numberOfPlanets < options.players');
     error = true;
   }
-  if (state.spaces.length < defaults.players) {
-    console.error('state.spaces.length < defaults.players');
+  if (state.spaces.length < options.players) {
+    console.error('state.spaces.length < options.players');
     error = true;
   }
 
@@ -71,7 +71,7 @@ function validate(numberOfPlanets) {
     console.error('numberOfPlanets > state.spaces.length');
     return state.spaces.length;
   }
-  if (error && (state.spaces.length >= defaults.players) ) {
+  if (error && (state.spaces.length >= options.players) ) {
     return state.spaces.length;
   }
 
@@ -79,7 +79,8 @@ function validate(numberOfPlanets) {
 }
 
 export function addPlanets() {
-  let planets = validate(Math.round(state.spaces.length * defaults.density));
+  let numberOfPlanets = Math.round(state.spaces.length * options.density);
+  let planets = validate(numberOfPlanets);
 
   for (var i = 0; i < planets; i++) {
     locatePlanet(createPlanet());

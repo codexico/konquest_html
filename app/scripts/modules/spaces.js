@@ -1,26 +1,31 @@
-import { state } from '../main';
-
-function createSpaces() {
+function createSpace() {
   let spaceEl = document.createElement('span');
   spaceEl.className = 'space';
-
-  for (var i = 0; i < state.totalSpaces; i++) {
-    state.spaces.push(spaceEl.cloneNode());
-  }
+  return spaceEl;
 }
 
-export function addSpaces() {
-  createSpaces();
-  state.spaces.forEach(function (space) {
+function createSpaces(total) {
+  let spaceEl = createSpace();
+  let spaces = [];
+
+  for (var i = 0; i < total; i++) {
+    spaces.push(spaceEl.cloneNode());
+  }
+  return spaces;
+}
+
+export function addSpaces(state, total) {
+  state.spaces = createSpaces(total);
+  state.spaces.map( (space) => {
     state.universe.appendChild(space);
   });
 }
 
-export function getEmptySpace() {
-  let space = state.spaces[Math.floor(Math.random() * state.spaces.length)];
+export function getEmptySpace(spaces) {
+  let space = spaces[Math.floor(Math.random() * spaces.length)];
   if (!space.planet) {
     return space;
   }
   // try again
-  return getEmptySpace();
+  return getEmptySpace(spaces);
 }

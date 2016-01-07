@@ -1,5 +1,5 @@
 function prepateTurn(state, planets, fleets) {
-  return state.planets
+  state.planets
     .filter(planets.isOcuppied)
     .map(planets.grow)
     .filter(planets.wishToSendFleet)

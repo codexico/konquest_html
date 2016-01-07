@@ -1,4 +1,4 @@
-import { state, defaults } from '../main';
+import { state, options } from '../main';
 
 function nextPlanet(planet) {
   // todo: use x,y to calculate near planets
@@ -15,8 +15,8 @@ export function chooseDestiny(planet) {
 }
 
 export function calcRandomProduction() {
-  let minProduction = defaults.production / 2;
-  let randomProduction = Math.floor(Math.random() * defaults.production);
+  let minProduction = options.production / 2;
+  let randomProduction = Math.floor(Math.random() * options.production);
 
   return minProduction + randomProduction;
 }
