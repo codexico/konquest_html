@@ -25,7 +25,8 @@ module.exports = function (grunt) {
     var config = {
         app: 'app',
         dist: 'dist',
-        tmp: '.tmp'
+        tmp: '.tmp',
+        test: 'test'
     };
 
     // Define the configuration for all the tasks
@@ -45,6 +46,17 @@ module.exports = function (grunt) {
                 tasks: [
                     'newer:eslint',
                     'browserify:dist',
+                    'browserSync:test',
+                    'mocha'
+                ]
+            },
+            test: {
+                files: [
+                    '<%= config.test %>/spec/{,*/}*.js',
+                    '<%= config.test %>/index.html'
+                ],
+                tasks: [
+                    'newer:eslint',
                     'browserSync:test',
                     'mocha'
                 ]
