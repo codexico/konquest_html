@@ -1,4 +1,5 @@
 {
+    "root": true,
     "rules": {
         "indent": [
             2,
@@ -81,7 +82,7 @@
         "object-curly-spacing": "error",
         "one-var": ["error", "never"],
         "operator-linebreak": ["error", "after"],
-        "quote-props": "error",
+        "quote-props": ["error", "as-needed"],
         "semi-spacing": "error",
         "sort-imports": "error",
         "space-before-blocks": "error",
@@ -93,7 +94,8 @@
     },
     "env": {
         "es6": true,
-        "browser": true
+        "browser": true,
+        "node": true
     },
     "ecmaFeatures": {
         "modules": true
