@@ -1,10 +1,9 @@
 import './helpers/polyfills';
-import * as universe from './modules/universe';
+import * as fleets from './modules/fleets';
+import * as game from './modules/game';
 import * as planets from './modules/planets';
 import * as players from './modules/players';
-import * as fleets from './modules/fleets';
-import * as utils from './modules/utils';
-import * as game from './modules/game';
+import * as universe from './modules/universe';
 
 let defaults = {
     rows: 9,
@@ -33,7 +32,7 @@ function initUI() {
 }
 
 function endTurn() {
-    game.endTurn(state, planets, fleets, utils);
+    game.endTurn(state, planets, fleets);
 }
 
 function initListeners() {
@@ -45,7 +44,7 @@ function initOptions() {
     return defaults;
 }
 
-(function init() {
+function init() {
     options = initOptions();
     ui = initUI();
 
@@ -53,4 +52,6 @@ function initOptions() {
     universe.initUniverse(ui, options);
     players.addPlayers();
     ui.listeners = initListeners(ui);
-}());
+}
+
+init();

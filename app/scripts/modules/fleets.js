@@ -1,5 +1,5 @@
-import { state } from '../main';
-import { chooseDestiny } from './utils';
+import {chooseDestiny} from './utils';
+import {state} from '../main';
 
 function generateFleet(planet) {
     let fleet = {};

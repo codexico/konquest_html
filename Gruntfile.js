@@ -352,7 +352,7 @@ module.exports = function (grunt) {
                 'babel'
             ],
             dist: [
-                'browserify',
+                'browserify:dist',
                 'sass',
                 'imagemin',
                 'svgmin'

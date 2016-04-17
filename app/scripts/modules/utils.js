@@ -1,12 +1,12 @@
-import { state, options } from '../main';
+import {options, state} from '../main';
 
 function nextPlanet(planet) {
     // todo: use x,y to calculate near planets
-    let nextPlanet = state.planets.indexOf(planet) + 1;
-    if (nextPlanet === state.planets.length) {
-        nextPlanet = 0;
+    let p = state.planets.indexOf(planet) + 1;
+    if (p === state.planets.length) {
+        p = 0;
     }
-    return state.planets[nextPlanet];
+    return state.planets[p];
 }
 
 export function chooseDestiny(planet) {
@@ -39,12 +39,12 @@ export function score() {
         player.planets.forEach(function (planet) {
             ships += planet.ships;
             production += planet.production;
-            countTotalPlanets++;
+            countTotalPlanets += 1;
         });
 
-        if (!player.planets.length) {
+        if (player.planets.length === 0) {
             console.log(player.name, 'is dead :(');
-            dead++;
+            dead += 1;
         } else {
             console.log(player.name,
                 'planets =', player.planets.length,

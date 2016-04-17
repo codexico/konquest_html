@@ -1,3 +1,5 @@
+import * as utils from './utils';
+
 function prepateTurn(state, planets, fleets) {
     state.planets
     .filter(planets.isOcuppied)
@@ -13,8 +15,8 @@ function executeTurn(state, fleets) {
     state.fleets = [];
 }
 
-export function endTurn(state, planets, fleets, utils) {
-    state.turn++;
+export function endTurn(state, planets, fleets) {
+    state.turn += 1;
 
     console.groupCollapsed('turn ', state.turn);
     prepateTurn(state, planets, fleets);

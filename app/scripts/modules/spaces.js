@@ -8,7 +8,7 @@ function createSpaces(total) {
     let spaceEl = createSpace();
     let allSpaces = [];
 
-    for (var i = 0; i < total; i++) {
+    for (let i = 0; i < total; i++) {
         allSpaces.push(spaceEl.cloneNode());
     }
     return allSpaces;
@@ -16,7 +16,7 @@ function createSpaces(total) {
 
 export function addSpaces(universeEl, size) {
     let allSpaces = createSpaces(size);
-    allSpaces.map( (space) => {
+    allSpaces.map((space) => {
         universeEl.appendChild(space);
     });
     return allSpaces;
