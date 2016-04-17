@@ -40,10 +40,6 @@ module.exports = function (grunt) {
                 files: ['bower.json'],
                 tasks: ['wiredep']
             },
-            // babel: {
-            //   files: ['<%= config.app %>/scripts/{,*/}*.js'],
-            //   tasks: ['babel:dist']
-            // },
             browserify: {
                 files: ['<%= config.app %>/scripts/{,*/}*.js'],
                 tasks: [
@@ -52,10 +48,6 @@ module.exports = function (grunt) {
                     'browserSync:test',
                     'mocha'
                 ]
-            },
-            babelTest: {
-                files: ['test/spec/{,*/}*.js'],
-                tasks: ['babel:test', 'test:watch']
             },
             gruntfile: {
                 files: ['Gruntfile.js'],
@@ -162,15 +154,6 @@ module.exports = function (grunt) {
             options: {
                 sourceMap: true
             },
-            // dist: {
-            //   files: [{
-            //     expand: true,
-            //     cwd: '<%= config.app %>/scripts',
-            //     src: '{,*/}*.js',
-            //     dest: '.tmp/scripts',
-            //     ext: '.js'
-            //   }]
-            // },
             test: {
                 files: [{
                     expand: true,
@@ -329,32 +312,6 @@ module.exports = function (grunt) {
             }
         },
 
-        // By default, your `index.html`'s <!-- Usemin block --> will take care
-        // of minification. These next options are pre-configured if you do not
-        // wish to use the Usemin blocks.
-        // cssmin: {
-        //   dist: {
-        //     files: {
-        //       '<%= config.dist %>/styles/main.css': [
-        //         '.tmp/styles/{,*/}*.css',
-        //         '<%= config.app %>/styles/{,*/}*.css'
-        //       ]
-        //     }
-        //   }
-        // },
-        // uglify: {
-        //   dist: {
-        //     files: {
-        //       '<%= config.dist %>/scripts/scripts.js': [
-        //         '<%= config.dist %>/scripts/scripts.js'
-        //       ]
-        //     }
-        //   }
-        // },
-        // concat: {
-        //   dist: {}
-        // },
-
         // Copies remaining files to places other tasks can use
         copy: {
             dist: {
@@ -387,7 +344,6 @@ module.exports = function (grunt) {
         // Run some tasks in parallel to speed up build process
         concurrent: {
             server: [
-                // 'babel:dist',
                 'browserify:dist',
                 'sass'
             ],
@@ -396,7 +352,6 @@ module.exports = function (grunt) {
                 'babel'
             ],
             dist: [
-                // 'babel',
                 'browserify',
                 'sass',
                 'imagemin',
@@ -425,11 +380,6 @@ module.exports = function (grunt) {
         }
     );
 
-    grunt.registerTask('server', function (target) {
-        grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-        grunt.task.run([target ? ('serve:' + target) : 'serve']);
-    });
-
     grunt.registerTask('test', function (target) {
         if (target !== 'watch') {
             grunt.task.run([
@@ -448,14 +398,9 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'wiredep',
-        // 'useminPrepare',
         'concurrent:dist',
         'postcss',
-        // 'concat',
-        // 'cssmin',
-        // 'uglify', // uglify dont support es6
         'copy',
-        // 'usemin',
         'htmlmin'
     ]);
 
