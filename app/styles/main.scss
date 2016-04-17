@@ -2,9 +2,9 @@
 // endbower
 
 body {
-  background: #fafafa;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #333;
+    background: #fafafa;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
 }
 
 $spaceW: 28;
@@ -12,58 +12,58 @@ $planetW: $spaceW * 0.7;
 $spaceBorderW: 1;
 
 .universe {
-  background-color: #000;
-  display: block;
+    background-color: #000;
+    display: block;
 }
 .singularity {
-  display: block;
-  width: $spaceW + ($spaceBorderW * 2) + px;
-  height: 0;
-  overflow: hidden;
+    display: block;
+    width: $spaceW + ($spaceBorderW * 2) + px;
+    height: 0;
+    overflow: hidden;
 }
 .space {
-  position: relative;
-  display: inline-block;
-  width: $spaceW + px;
-  height: $spaceW + px;
+    position: relative;
+    display: inline-block;
+    width: $spaceW + px;
+    height: $spaceW + px;
 
-  border: ($spaceBorderW + px) solid #333;
+    border: ($spaceBorderW + px) solid #333;
 
-  vertical-align: middle;
+    vertical-align: middle;
 
-  background-color: #000;
-  text-align: center;
+    background-color: #000;
+    text-align: center;
 }
 .planet {
-  display: inline-block;
-  width: $planetW + px;
-  height: $planetW + px;
+    display: inline-block;
+    width: $planetW + px;
+    height: $planetW + px;
 
-  margin-top: ($spaceW - $planetW)/2 + px;
+    margin-top: ($spaceW - $planetW)/2 + px;
 
-  border-radius: $planetW + px;
+    border-radius: $planetW + px;
 
-  background-color: #234ad6;
+    background-color: #234ad6;
 }
 .planet-name {
-  color: #fff;
-  font-size: 9px;
+    color: #fff;
+    font-size: 9px;
 }
 .player_0 {
-  background-color: #f00;
+    background-color: #f00;
 }
 .player_1 {
-  background-color: #ff0;
+    background-color: #ff0;
 }
 .player_2 {
-  background-color: #f0f;
+    background-color: #f0f;
 }
 .player_3 {
-  background-color: #0f0;
+    background-color: #0f0;
 }
 .player_4 {
-  background-color: #0ff;
+    background-color: #0ff;
 }
 .player_5 {
-  background-color: #00f;
+    background-color: #00f;
 }
