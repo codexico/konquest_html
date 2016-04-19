@@ -4,7 +4,7 @@ import {state} from '../main';
 function generateFleet(planet) {
     let fleet = {};
     fleet.ships = Math.round(Math.random() * planet.ships);
-    fleet.destiny = chooseDestiny(planet);
+    fleet.destiny = chooseDestiny(state, planet);
     fleet.player = planet.player;
     return fleet;
 }

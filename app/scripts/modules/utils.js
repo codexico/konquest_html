@@ -1,6 +1,4 @@
-import {state} from '../main';
-
-function nextPlanet(planet) {
+function nextPlanet(state, planet) {
     // todo: use x,y to calculate near planets
     let p = state.planets.indexOf(planet) + 1;
     if (p === state.planets.length) {
@@ -9,9 +7,9 @@ function nextPlanet(planet) {
     return state.planets[p];
 }
 
-export function chooseDestiny(planet) {
+export function chooseDestiny(state, planet) {
     // todo: more and better algorithms
-    return nextPlanet(planet);
+    return nextPlanet(state, planet);
 }
 
 export function calcRandomProduction(options) {
@@ -21,7 +19,7 @@ export function calcRandomProduction(options) {
     return minProduction + randomProduction;
 }
 
-function end() {
+function end(state) {
     state.players.forEach(function (player) {
         if (player.planets.length) {
             console.info(player.name, 'is the winner!');
@@ -29,7 +27,7 @@ function end() {
     });
 }
 
-export function score() {
+export function logScore(state) {
     console.group();
     let dead = 0;
     let countTotalPlanets = 0;
@@ -55,7 +53,7 @@ export function score() {
     });
 
     if (state.players.length - dead === 1) {
-        end();
+        end(state);
     }
     console.groupEnd();
 }

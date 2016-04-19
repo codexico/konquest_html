@@ -1,4 +1,4 @@
-import * as utils from './utils';
+import {logScore} from './utils';
 
 function prepateTurn(state, planets, fleets) {
     state.planets
@@ -24,5 +24,5 @@ export function endTurn(state, planets, fleets) {
     executeTurn(state, fleets);
     console.groupEnd();
 
-    utils.score();
+    logScore(state);
 }
