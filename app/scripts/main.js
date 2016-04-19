@@ -14,6 +14,7 @@ let defaults = {
     production: 10
 };
 let options = {};
+let ui = {};
 
 export let state = {
     turn: 0,
@@ -22,7 +23,6 @@ export let state = {
     players: [],
     fleets: []
 };
-export let ui = {};
 
 function initUI() {
     return {
