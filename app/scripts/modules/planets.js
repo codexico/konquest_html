@@ -1,6 +1,6 @@
-import {options, state} from '../main';
 import {calcRandomProduction} from './utils';
 import {getEmptySpace} from './spaces';
+import {state} from '../main';
 
 // todo: better and others algorithms
 export function wishToSendFleet(planet) {
@@ -40,10 +40,10 @@ function addPlanetName(planetEl) {
 }
 
 // todo: kill percent
-function createPlanet() {
+function createPlanet(options) {
     let planet = document.createElement('span');
 
-    planet.production = calcRandomProduction();
+    planet.production = calcRandomProduction(options);
     planet.className = 'planet';
     planet = addPlanetName(planet);
 
@@ -58,33 +58,33 @@ function locatePlanet(allSpaces, planet) {
     space.planet = planet;
 }
 
-function isInvalidNumberOfPlanets(allSpaces, numberOfPlanets) {
+function isInvalidNumberOfPlanets(allSpaces, numberOfPlanets, numberOfPlayers) {
     let error = false;
-    if (numberOfPlanets < options.players) {
-        console.error('numberOfPlanets < options.players');
+    if (numberOfPlanets < numberOfPlayers) {
+        console.error('numberOfPlanets < numberOfPlayers');
         error = true;
     }
-    if (allSpaces.length < options.players) {
-        console.error('allSpaces.length < options.players');
+    if (allSpaces.length < numberOfPlayers) {
+        console.error('allSpaces.length < numberOfPlayers');
         error = true;
     }
     return error;
 }
 
-function getNumberOfPlanets(allSpaces) {
+function getNumberOfPlanets(options, allSpaces) {
     let numberOfPlanets = Math.round(allSpaces.length * options.density);
 
-    if (isInvalidNumberOfPlanets(allSpaces)) {
+    if (isInvalidNumberOfPlanets(allSpaces, numberOfPlanets, options.players)) {
         numberOfPlanets = allSpaces.length;
     }
 
     return numberOfPlanets;
 }
 
-export function addPlanets(allSpaces) {
-    let planets = getNumberOfPlanets(allSpaces);
+export function addPlanets(options, allSpaces) {
+    let planets = getNumberOfPlanets(options, allSpaces);
 
     for (let i = 0; i < planets; i++) {
-        locatePlanet(allSpaces, createPlanet());
+        locatePlanet(allSpaces, createPlanet(options));
     }
 }

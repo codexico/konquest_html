@@ -10,7 +10,7 @@ function createUniverse() {
 export function initUniverse(ui, options) {
     let universeEl = createUniverse();
     let allSpaces = spaces.addSpaces(universeEl, options.rows * options.cols);
-    planets.addPlanets(allSpaces);
+    planets.addPlanets(options, allSpaces);
 
     ui.map.appendChild(universeEl);
 }

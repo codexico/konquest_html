@@ -13,6 +13,7 @@ let defaults = {
     ships: 10,
     production: 10
 };
+let options = {};
 
 export let state = {
     turn: 0,
@@ -22,7 +23,6 @@ export let state = {
     fleets: []
 };
 export let ui = {};
-export let options = {};
 
 function initUI() {
     return {
@@ -50,7 +50,7 @@ function init() {
 
     universe.bigBang(ui, options);
     universe.initUniverse(ui, options);
-    players.addPlayers();
+    players.addPlayers(options);
     ui.listeners = initListeners(ui);
 }
 

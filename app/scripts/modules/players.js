@@ -1,7 +1,7 @@
-import {options, state} from '../main';
 import {getEmptyPlanet} from './planets';
+import {state} from '../main';
 
-function createLife(planet, player) {
+function createLife(options, planet, player) {
     planet.space.classList.add(player.name);
     planet.ships = options.ships;
     planet.production = options.production; // override random production
@@ -18,12 +18,12 @@ function createPlayer() {
     return state.players[state.players.length - 1];
 }
 
-function addPlayer() {
-    createLife(getEmptyPlanet(), createPlayer());
+function addPlayer(options) {
+    createLife(options, getEmptyPlanet(), createPlayer());
 }
 
-export function addPlayers() {
+export function addPlayers(options) {
     for (let i = 0; i < options.players; i++) {
-        addPlayer();
+        addPlayer(options);
     }
 }

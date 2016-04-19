@@ -1,4 +1,4 @@
-import {options, state} from '../main';
+import {state} from '../main';
 
 function nextPlanet(planet) {
     // todo: use x,y to calculate near planets
@@ -14,7 +14,7 @@ export function chooseDestiny(planet) {
     return nextPlanet(planet);
 }
 
-export function calcRandomProduction() {
+export function calcRandomProduction(options) {
     let minProduction = options.production / 2;
     let randomProduction = Math.floor(Math.random() * options.production);
 
