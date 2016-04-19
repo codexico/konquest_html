@@ -1,5 +1,4 @@
 import {getEmptyPlanet} from './planets';
-import {state} from '../main';
 
 function createLife(options, planet, player) {
     planet.space.classList.add(player.name);
@@ -10,7 +9,7 @@ function createLife(options, planet, player) {
     player.planets.push(planet);
 }
 
-function createPlayer() {
+function createPlayer(state) {
     let player = document.createElement('span');
     player.name = 'player_' + state.players.length;
     player.className = 'player ' + player.name;
@@ -18,12 +17,12 @@ function createPlayer() {
     return state.players[state.players.length - 1];
 }
 
-function addPlayer(options) {
-    createLife(options, getEmptyPlanet(), createPlayer());
+function addPlayer(options, state) {
+    createLife(options, getEmptyPlanet(state), createPlayer(state));
 }
 
-export function addPlayers(options) {
+export function addPlayers(options, state) {
     for (let i = 0; i < options.players; i++) {
-        addPlayer(options);
+        addPlayer(options, state);
     }
 }

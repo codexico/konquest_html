@@ -5,7 +5,9 @@ function prepateTurn(state, planets, fleets) {
     state.planets
     .filter(planets.isOcuppied)
     .map(planets.grow)
-    .filter(planets.wishToSendFleet)
+    .filter((planet) => {
+        return planets.wishToSendFleet(state, planet);
+    })
     .map((planet) => {
         return fleets.createFleet(state, planet);
     });

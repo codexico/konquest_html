@@ -7,12 +7,13 @@ function createUniverse() {
     return universeEl;
 }
 
-export function initUniverse(ui, options) {
+export function initUniverse(ui, options, state) {
     let universeEl = createUniverse();
     let allSpaces = spaces.addSpaces(universeEl, options.rows * options.cols);
-    planets.addPlanets(options, allSpaces);
+    state.planets = planets.addPlanets(options, state, allSpaces);
 
     ui.map.appendChild(universeEl);
+    return state;
 }
 
 export function bigBang(ui, options) {

@@ -1,9 +1,8 @@
 import {calcRandomProduction} from './utils';
 import {getEmptySpace} from './spaces';
-import {state} from '../main';
 
 // todo: better and others algorithms
-export function wishToSendFleet(planet) {
+export function wishToSendFleet(state, planet) {
     let planetBaseFleet = 10;
     let minGrow = 2;
     let planetMinFleet = planetBaseFleet + (state.turn * minGrow);
@@ -19,7 +18,7 @@ export function grow(planet) {
     return planet;
 }
 
-export function getEmptyPlanet() {
+export function getEmptyPlanet(state) {
     let planetIndex = Math.floor(Math.random() * state.planets.length);
     let planet = state.planets[planetIndex];
 
@@ -27,11 +26,11 @@ export function getEmptyPlanet() {
         return planet;
     }
     // try again
-    return getEmptyPlanet();
+    return getEmptyPlanet(state);
 }
 
-function addPlanetName(planetEl) {
-    planetEl.name = 'p' + state.planets.length;
+function addPlanetName(planetName, planetEl) {
+    planetEl.name = planetName;
     let nameEl = document.createElement('span');
     nameEl.className = 'planet-name';
     nameEl.innerHTML = planetEl.name;
@@ -40,22 +39,21 @@ function addPlanetName(planetEl) {
 }
 
 // todo: kill percent
-function createPlanet(options) {
-    let planet = document.createElement('span');
+function createPlanet(options, planetName) {
+    let planetEl = document.createElement('span');
 
-    planet.production = calcRandomProduction(options);
-    planet.className = 'planet';
-    planet = addPlanetName(planet);
+    planetEl.production = calcRandomProduction(options);
+    planetEl.className = 'planet';
+    planetEl = addPlanetName(planetName, planetEl);
 
-    state.planets.push(planet);
-    return planet;
+    return planetEl;
 }
 
 function locatePlanet(allSpaces, planet) {
     let space = getEmptySpace(allSpaces);
     space.appendChild(planet);
-    planet.space = space;
     space.planet = planet;
+    return space;
 }
 
 function isInvalidNumberOfPlanets(allSpaces, numberOfPlanets, numberOfPlayers) {
@@ -81,10 +79,18 @@ function getNumberOfPlanets(options, allSpaces) {
     return numberOfPlanets;
 }
 
-export function addPlanets(options, allSpaces) {
-    let planets = getNumberOfPlanets(options, allSpaces);
+export function addPlanets(options, state, allSpaces) {
+    let numberOfPlanets = getNumberOfPlanets(options, allSpaces);
+    let planets = [];
 
-    for (let i = 0; i < planets; i++) {
-        locatePlanet(allSpaces, createPlanet(options));
+    for (let i = 0; i < numberOfPlanets; i++) {
+        let planetName = 'p' + i;
+        let planet = createPlanet(options, planetName);
+
+        planet.space = locatePlanet(allSpaces, planet);
+
+        planets.push(planet);
     }
+
+    return planets;
 }

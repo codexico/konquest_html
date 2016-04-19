@@ -49,8 +49,8 @@ function init() {
     ui = initUI();
 
     universe.bigBang(ui, options);
-    universe.initUniverse(ui, options);
-    players.addPlayers(options);
+    state = universe.initUniverse(ui, options, state);
+    players.addPlayers(options, state);
     ui.listeners = initListeners(ui);
 }
 
