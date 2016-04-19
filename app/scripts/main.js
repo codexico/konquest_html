@@ -15,8 +15,7 @@ let defaults = {
 };
 let options = {};
 let ui = {};
-
-export let state = {
+let state = {
     turn: 0,
     spaces: [],
     planets: [],
