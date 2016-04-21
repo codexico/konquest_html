@@ -35,7 +35,7 @@ function endTurn() {
 }
 
 function initListeners() {
-    return ui.buttonEnd.addEventListener('click', endTurn);
+    ui.buttonEnd.addEventListener('click', endTurn);
 }
 
 function initOptions() {
@@ -48,9 +48,9 @@ function init() {
     ui = initUI();
 
     universe.bigBang(ui, options);
-    state = universe.initUniverse(ui, options, state);
+    universe.initUniverse(ui, options, state);
     players.addPlayers(options, state);
-    ui.listeners = initListeners(ui);
+    initListeners();
 }
 
 init();

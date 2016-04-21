@@ -1,5 +1,30 @@
 import {chooseDestiny} from './utils';
 
+export function selectDestinyPlanet(state, planet) {
+    state.destinyPlanet = planet;
+    let destinyHTHML = document.querySelector('.destiny_planet');
+    destinyHTHML.innerHTML = planet.name;
+}
+
+function setSourcePlanet(state, planet) {
+    state.sourcePlanet = planet;
+    let sourceHTHML = document.querySelector('.source_planet');
+    sourceHTHML.innerHTML = planet.name;
+}
+
+export function selectSourcePlanet(state, planet) {
+    if (state.sourcePlanet) {
+        if (planet === state.sourcePlanet) {
+            console.log('same planet');
+        } else {
+            console.log('source changed', planet);
+            setSourcePlanet(state, planet);
+        }
+    } else {
+        setSourcePlanet(state, planet);
+    }
+}
+
 function generateFleet(state, planet) {
     let fleet = {};
     fleet.ships = Math.round(Math.random() * planet.ships);
@@ -25,7 +50,16 @@ function konquerPlanet(state, fleet) {
 
     planet.space.className = 'space';
     planet.space.classList.add(fleet.player.name);
+    planet.space.classList.add(fleet.player.type);
     planet.player = fleetPlayer;
+
+    if (fleet.player.type === 'human') {
+        planet.space.addEventListener('click', function onClickPlanet(e) {
+            let clickedPlanet = e.target.planet || e.target.offsetParent.planet;
+            console.log(clickedPlanet);
+            selectSourcePlanet(state, clickedPlanet);
+        });
+    }
 
     oldPlayer.planets.pop(planet);
     fleetPlayer.planets.push(planet);
@@ -39,6 +73,7 @@ function occupyPlanet(state, fleet) {
     let fleetPlayerIndex = state.players.indexOf(fleet.player);
 
     state.planets[planetIndex].space.classList.add(fleet.player.name);
+    state.planets[planetIndex].space.classList.add(fleet.player.type);
     state.planets[planetIndex].player = state.players[fleetPlayerIndex];
     state.players[fleetPlayerIndex].planets.push(state.planets[planetIndex]);
     state.planets[planetIndex].ships = fleet.ships;

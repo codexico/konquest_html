@@ -1,3 +1,4 @@
+import {selectDestinyPlanet, selectSourcePlanet} from './fleets';
 import {calcRandomProduction} from './utils';
 import {getEmptySpace} from './spaces';
 
@@ -91,12 +92,21 @@ export function addPlanets(options, state, allSpaces) {
     let numberOfPlanets = getNumberOfPlanets(options, allSpaces);
     let planets = [];
 
+    function onClickPlanet(e) {
+        let clickedPlanet = e.target.planet || e.target.offsetParent.planet;
+        if (clickedPlanet.player && clickedPlanet.player.type === 'human') {
+            selectSourcePlanet(state, clickedPlanet);
+        } else if (state.sourcePlanet) {
+            selectDestinyPlanet(state, clickedPlanet);
+        }
+    }
+
     for (let i = 0; i < numberOfPlanets; i++) {
         let planetName = 'p' + i;
         let planet = createPlanet(options, planetName);
 
         planet.space = locatePlanet(allSpaces, planet);
-
+        planet.space.addEventListener('click', onClickPlanet);
         planets.push(planet);
     }
 
