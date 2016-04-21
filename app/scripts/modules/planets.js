@@ -9,11 +9,19 @@ export function wishToSendFleet(state, planet) {
     return planet.ships > planetMinFleet;
 }
 
-export function isOcuppied(planet) {
+export function isOccupied(planet) {
     return planet.player;
 }
 
-export function grow(planet) {
+export function isComputer(player) {
+    return player.type === 'computer';
+}
+
+export function isOccupiedByComputer(planet) {
+    return isOccupied(planet) && isComputer(planet.player);
+}
+
+export function growPlanet(planet) {
     planet.ships += planet.production;
     return planet;
 }

@@ -6,8 +6,8 @@ import * as players from './modules/players';
 import * as universe from './modules/universe';
 
 let defaults = {
-    rows: 9,
-    cols: 7,
+    rows: 14,
+    cols: 10,
     density: 0.2,
     players: 5,
     ships: 10,

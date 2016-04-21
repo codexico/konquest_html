@@ -1,16 +1,25 @@
 import {logScore} from './utils';
 
-function prepateTurn(state, planets, fleets) {
-
+function growPlanets(state, planets) {
     state.planets
-    .filter(planets.isOcuppied)
-    .map(planets.grow)
+    .filter(planets.isOccupied)
+    .map(planets.growPlanet);
+}
+
+function prepareComputerTurn(state, planets, fleets) {
+    state.planets
+    .filter(planets.isOccupiedByComputer)
     .filter((planet) => {
         return planets.wishToSendFleet(state, planet);
     })
     .map((planet) => {
-        return fleets.createFleet(state, planet);
+        fleets.createFleet(state, planet);
     });
+}
+
+function prepateTurn(state, planets, fleets) {
+    growPlanets(state, planets);
+    prepareComputerTurn(state, planets, fleets);
 }
 
 function executeTurn(state, fleets) {
