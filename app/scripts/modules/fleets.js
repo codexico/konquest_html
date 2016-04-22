@@ -14,8 +14,14 @@ export function createHumanFleet(e, state) {
 export function selectDestinyPlanet(state, planet) {
     state.destinyPlanet = planet;
 
-    let destinyHTHML = document.querySelector('.destiny_planet');
-    destinyHTHML.innerHTML = planet.name;
+    let destiny = document.querySelector('.destiny_planet');
+
+    let destinyName = destiny.querySelector('.destiny_planet-name');
+    destinyName.innerHTML = planet.name;
+    let destinyShips = destiny.querySelector('.destiny_planet-ships');
+    destinyShips.innerHTML = planet.ships || 0;
+    let destinyProduction = destiny.querySelector('.destiny_planet-production');
+    destinyProduction.innerHTML = planet.production;
 
     let fleetSizeInput = document.getElementById('fleet-size');
     fleetSizeInput.disabled = false;
@@ -30,7 +36,7 @@ function setSourcePlanet(state, planet) {
     let sourceName = source.querySelector('.source_planet-name');
     sourceName.innerHTML = planet.name;
     let sourceShips = source.querySelector('.source_planet-ships');
-    sourceShips.innerHTML = planet.ships;
+    sourceShips.innerHTML = planet.ships || 0;
     let sourceProduction = source.querySelector('.source_planet-production');
     sourceProduction.innerHTML = planet.production;
 }

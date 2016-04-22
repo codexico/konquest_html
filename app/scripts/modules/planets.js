@@ -24,7 +24,6 @@ export function isOccupiedByComputer(planet) {
 
 export function growPlanet(planet) {
     planet.ships += parseInt(planet.production, 10);
-    console.log(planet.name, planet.ships);
 }
 
 export function getEmptyPlanet(state) {

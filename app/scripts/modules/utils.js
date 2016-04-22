@@ -30,14 +30,13 @@ function end(state) {
 export function logScore(state) {
     console.group();
     let dead = 0;
-    let countTotalPlanets = 0;
+    
     state.players.forEach(function (player) {
         let ships = 0;
         let production = 0;
         player.planets.forEach(function (planet) {
             ships += parseInt(planet.ships, 10);
             production += planet.production;
-            countTotalPlanets += 1;
         });
 
         if (player.planets.length === 0) {
