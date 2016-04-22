@@ -35,21 +35,12 @@ function endTurn() {
     game.endTurn(state, planets, fleets);
 }
 
-function resetFleetForm(fleetForm) {
-    fleetForm.reset();
-    fleetForm['fleet-size'].disabled = true;
-    let els = fleetForm.querySelectorAll('.planet_data-data');
-    Array.prototype.map.call(els, (el) => {
-        el.innerHTML = '';
-    });
-}
-
 function onSubmitFleetForm(e) {
     fleets.createHumanFleet(e, state);
     state.sourcePlanet = undefined;
     state.destinyPlanet = undefined;
 
-    resetFleetForm(e.target);
+    fleets.resetFleetForm();
 }
 
 function initListeners() {

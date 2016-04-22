@@ -56,3 +56,7 @@ export function logScore(state) {
     }
     console.groupEnd();
 }
+
+export function isOccupier(planet, player) {
+    return planet.player === player;
+}

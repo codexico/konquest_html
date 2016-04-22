@@ -1,5 +1,5 @@
+import {calcRandomProduction, isOccupier} from './utils';
 import {selectDestinyPlanet, selectSourcePlanet} from './fleets';
-import {calcRandomProduction} from './utils';
 import {getEmptySpace} from './spaces';
 
 // todo: better and others algorithms
@@ -93,7 +93,7 @@ export function addPlanets(options, state, allSpaces) {
 
     function onClickPlanet(e) {
         let clickedPlanet = e.target.planet || e.target.offsetParent.planet;
-        if (clickedPlanet.player && clickedPlanet.player.type === 'human') {
+        if (isOccupier(clickedPlanet, state.players[0])) {
             selectSourcePlanet(state, clickedPlanet);
         } else if (state.sourcePlanet) {
             selectDestinyPlanet(state, clickedPlanet);

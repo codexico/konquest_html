@@ -1,4 +1,4 @@
-import {chooseDestiny} from './utils';
+import {chooseDestiny, isOccupier} from './utils';
 
 export function createHumanFleet(e, state) {
     e.preventDefault();
@@ -11,8 +11,14 @@ export function createHumanFleet(e, state) {
     state.fleets.push(fleet);
 }
 
-function isOccupier(planet, player) {
-    return planet.player === player;
+export function resetFleetForm() {
+    let fleetForm = document.getElementById('fleet-form');
+    fleetForm.reset();
+    fleetForm['fleet-size'].disabled = true;
+    let els = fleetForm.querySelectorAll('.planet_data-data');
+    Array.prototype.map.call(els, (el) => {
+        el.innerHTML = '';
+    });
 }
 
 function showDestinyData(planet, occupier) {
@@ -55,10 +61,11 @@ function setSourcePlanet(state, planet) {
 export function selectSourcePlanet(state, planet) {
     if (state.sourcePlanet) {
         if (planet === state.sourcePlanet) {
-            console.log('same planet');
+            state.sourcePlanet = undefined;
+            state.destinyPlanet = undefined;
+            resetFleetForm();
         } else {
-            console.log('source changed', planet);
-            setSourcePlanet(state, planet);
+            selectDestinyPlanet(state, planet);
         }
     } else {
         setSourcePlanet(state, planet);
