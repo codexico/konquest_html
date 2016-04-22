@@ -25,8 +25,14 @@ export function selectDestinyPlanet(state, planet) {
 
 function setSourcePlanet(state, planet) {
     state.sourcePlanet = planet;
-    let sourceHTHML = document.querySelector('.source_planet');
-    sourceHTHML.innerHTML = planet.name;
+    let source = document.querySelector('.source_planet');
+
+    let sourceName = source.querySelector('.source_planet-name');
+    sourceName.innerHTML = planet.name;
+    let sourceShips = source.querySelector('.source_planet-ships');
+    sourceShips.innerHTML = planet.ships;
+    let sourceProduction = source.querySelector('.source_planet-production');
+    sourceProduction.innerHTML = planet.production;
 }
 
 export function selectSourcePlanet(state, planet) {

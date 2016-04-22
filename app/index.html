@@ -29,12 +29,38 @@
         <div class="step1">
             <p class="info">
                 Select source planet
-                <span class="selected_planet source_planet"></span>
+                <div class="planet_data source_planet">
+                    <p>
+                        Name:
+                        <span class="planet_data-data source_planet-name"></span>
+                    </p>
+                    <p>
+                        Ships:
+                        <span class="planet_data-data source_planet-ships"></span>
+                    </p>
+                    <p>
+                        Production:
+                        <span class="planet_data-data source_planet-production"></span>
+                    </p>
+                </div>
             </p>
         </div>
         <div class="step2">
             <p class="info">Select destination planet
-                <span class="selected_planet destiny_planet"></span>
+                <div class="planet_data destiny_planet">
+                    <p>
+                        Name:
+                        <span class="planet_data-data destiny_planet-name"></span>
+                    </p>
+                    <p>
+                        Ships:
+                        <span class="planet_data-data destiny_planet-ships"></span>
+                    </p>
+                    <p>
+                        Production:
+                        <span class="planet_data-data destiny_planet-production"></span>
+                    </p>
+                </div>
             </p>
         </div>
         <div class="step3">
@@ -53,7 +79,7 @@
     <button type="button" name="button" class="button end_turn">
         End Turn
     </button>
-    
+
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- endbower -->

@@ -38,7 +38,7 @@ function endTurn() {
 function resetFleetForm(fleetForm) {
     fleetForm.reset();
     fleetForm['fleet-size'].disabled = true;
-    let els = fleetForm.querySelectorAll('.selected_planet');
+    let els = fleetForm.querySelectorAll('.planet_data-data');
     Array.prototype.map.call(els, (el) => {
         el.innerHTML = '';
     });
@@ -46,6 +46,9 @@ function resetFleetForm(fleetForm) {
 
 function onSubmitFleetForm(e) {
     fleets.createHumanFleet(e, state);
+    state.sourcePlanet = undefined;
+    state.destinyPlanet = undefined;
+
     resetFleetForm(e.target);
 }
 
