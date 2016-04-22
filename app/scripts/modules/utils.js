@@ -30,7 +30,7 @@ function end(state) {
 export function logScore(state) {
     console.group();
     let dead = 0;
-    
+
     state.players.forEach(function (player) {
         let ships = 0;
         let production = 0;

@@ -11,17 +11,28 @@ export function createHumanFleet(e, state) {
     state.fleets.push(fleet);
 }
 
+function isOccupier(planet, player) {
+    return planet.player === player;
+}
+
+function showDestinyData(planet, occupier) {
+    let destiny = document.querySelector('.destiny_planet');
+    let destinyName = destiny.querySelector('.destiny_planet-name');
+    let destinyShips = destiny.querySelector('.destiny_planet-ships');
+    let destinyProduction = destiny.querySelector('.destiny_planet-production');
+
+    destinyName.innerHTML = planet.name;
+
+    if (occupier) {
+        destinyShips.innerHTML = planet.ships || 0;
+        destinyProduction.innerHTML = planet.production;
+    }
+}
+
 export function selectDestinyPlanet(state, planet) {
     state.destinyPlanet = planet;
 
-    let destiny = document.querySelector('.destiny_planet');
-
-    let destinyName = destiny.querySelector('.destiny_planet-name');
-    destinyName.innerHTML = planet.name;
-    let destinyShips = destiny.querySelector('.destiny_planet-ships');
-    destinyShips.innerHTML = planet.ships || 0;
-    let destinyProduction = destiny.querySelector('.destiny_planet-production');
-    destinyProduction.innerHTML = planet.production;
+    showDestinyData(planet, isOccupier(planet, state.players[0]));
 
     let fleetSizeInput = document.getElementById('fleet-size');
     fleetSizeInput.disabled = false;
@@ -32,12 +43,12 @@ export function selectDestinyPlanet(state, planet) {
 function setSourcePlanet(state, planet) {
     state.sourcePlanet = planet;
     let source = document.querySelector('.source_planet');
-
     let sourceName = source.querySelector('.source_planet-name');
-    sourceName.innerHTML = planet.name;
     let sourceShips = source.querySelector('.source_planet-ships');
-    sourceShips.innerHTML = planet.ships || 0;
     let sourceProduction = source.querySelector('.source_planet-production');
+
+    sourceName.innerHTML = planet.name;
+    sourceShips.innerHTML = planet.ships || 0;
     sourceProduction.innerHTML = planet.production;
 }
 
@@ -133,7 +144,7 @@ export function arrive(state, fleet) {
 
     if (!destinyPlanet.player) {
         occupyPlanet(state, fleet);
-    } else if (fleet.player === destinyPlanet.player) {
+    } else if (isOccupier(destinyPlanet, fleet.player)) {
         reinforcements(destinyPlanet, fleet.ships);
     } else {
         battle(state, fleet);
