@@ -13,7 +13,7 @@ export function chooseDestiny(state, planet) {
 }
 
 export function calcRandomProduction(options) {
-    let minProduction = options.production / 2;
+    let minProduction = Math.floor(options.production / 2);
     let randomProduction = Math.floor(Math.random() * options.production);
 
     return minProduction + randomProduction;
@@ -35,7 +35,7 @@ export function logScore(state) {
         let ships = 0;
         let production = 0;
         player.planets.forEach(function (planet) {
-            ships += planet.ships;
+            ships += parseInt(planet.ships, 10);
             production += planet.production;
             countTotalPlanets += 1;
         });

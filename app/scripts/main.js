@@ -16,7 +16,7 @@ let defaults = {
 let options = {};
 let ui = {};
 let state = {
-    turn: 0,
+    turns: [],
     spaces: [],
     planets: [],
     players: [],
@@ -26,7 +26,8 @@ let state = {
 function initUI() {
     return {
         map: document.getElementById('map'),
-        buttonEnd: document.querySelector('.end_turn')
+        buttonEnd: document.querySelector('.end_turn'),
+        fleetForm: document.getElementById('fleet-form')
     };
 }
 
@@ -34,8 +35,23 @@ function endTurn() {
     game.endTurn(state, planets, fleets);
 }
 
+function resetFleetForm(fleetForm) {
+    fleetForm.reset();
+    fleetForm['fleet-size'].disabled = true;
+    let els = fleetForm.querySelectorAll('.selected_planet');
+    Array.prototype.map.call(els, (el) => {
+        el.innerHTML = '';
+    });
+}
+
+function onSubmitFleetForm(e) {
+    fleets.createHumanFleet(e, state);
+    resetFleetForm(e.target);
+}
+
 function initListeners() {
     ui.buttonEnd.addEventListener('click', endTurn);
+    ui.fleetForm.addEventListener('submit', onSubmitFleetForm);
 }
 
 function initOptions() {

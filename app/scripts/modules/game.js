@@ -13,7 +13,7 @@ function prepareComputerTurn(state, planets, fleets) {
         return planets.wishToSendFleet(state, planet);
     })
     .map((planet) => {
-        fleets.createFleet(state, planet);
+        fleets.createComputerFleet(state, planet);
     });
 }
 
@@ -32,9 +32,12 @@ function executeTurn(state, fleets) {
 }
 
 export function endTurn(state, planets, fleets) {
-    state.turn += 1;
+    let turn = {};
+    turn.index = state.turns.length;
+    turn.state = Object.create(state);
+    state.turns.push(turn);
 
-    console.groupCollapsed('turn ', state.turn);
+    console.groupCollapsed('turn ', turn.index);
     prepateTurn(state, planets, fleets);
     console.log('state.fleets', state.fleets);
     executeTurn(state, fleets);

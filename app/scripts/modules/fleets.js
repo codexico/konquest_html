@@ -1,9 +1,26 @@
 import {chooseDestiny} from './utils';
 
+export function createHumanFleet(e, state) {
+    e.preventDefault();
+
+    let fleet = {};
+    fleet.ships = parseInt(e.target['fleet-size'].value, 10);
+    fleet.destiny = state.destinyPlanet;
+    fleet.player = state.sourcePlanet.player;
+    state.sourcePlanet.ships -= fleet.ships;
+    state.fleets.push(fleet);
+}
+
 export function selectDestinyPlanet(state, planet) {
     state.destinyPlanet = planet;
+
     let destinyHTHML = document.querySelector('.destiny_planet');
     destinyHTHML.innerHTML = planet.name;
+
+    let fleetSizeInput = document.getElementById('fleet-size');
+    fleetSizeInput.disabled = false;
+    fleetSizeInput.max = state.sourcePlanet.ships;
+    fleetSizeInput.focus();
 }
 
 function setSourcePlanet(state, planet) {
@@ -25,7 +42,7 @@ export function selectSourcePlanet(state, planet) {
     }
 }
 
-function generateFleet(state, planet) {
+function generateComputerFleet(state, planet) {
     let fleet = {};
     fleet.ships = Math.round(Math.random() * planet.ships);
     fleet.destiny = chooseDestiny(state, planet);
@@ -33,8 +50,8 @@ function generateFleet(state, planet) {
     return fleet;
 }
 
-export function createFleet(state, planet) {
-    let fleet = generateFleet(state, planet);
+export function createComputerFleet(state, planet) {
+    let fleet = generateComputerFleet(state, planet);
     planet.ships -= fleet.ships;
     state.fleets.push(fleet);
     return fleet;
@@ -56,7 +73,7 @@ function konquerPlanet(state, fleet) {
     if (fleet.player.type === 'human') {
         planet.space.addEventListener('click', function onClickPlanet(e) {
             let clickedPlanet = e.target.planet || e.target.offsetParent.planet;
-            console.log(clickedPlanet);
+            console.log('clickedPlanet', clickedPlanet);
             selectSourcePlanet(state, clickedPlanet);
         });
     }

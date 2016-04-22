@@ -21,24 +21,39 @@
 <body>
     <h1>konquest</h1>
 
-    <button type="button" name="button" class="button end_turn">
-        End Turn
-    </button>
-
     <span class="singularity">42</span>
     <div id="map">
     </div>
 
-    <div class="step1">
-        <p class="info">Select source planet <span class="source_planet"></span></p>
-    </div>
-    <div class="step2">
-        <p class="info">Select destination planet <span class="destiny_planet"></span></p>
-    </div>
-    <div class="step3">
-        <p class="info">How many ships? <input type="number"></p>
-    </div>
+    <form action="#" method="post" id="fleet-form">
+        <div class="step1">
+            <p class="info">
+                Select source planet
+                <span class="selected_planet source_planet"></span>
+            </p>
+        </div>
+        <div class="step2">
+            <p class="info">Select destination planet
+                <span class="selected_planet destiny_planet"></span>
+            </p>
+        </div>
+        <div class="step3">
+            <p class="info">How many ships?
+                <input
+                    id="fleet-size"
+                    type="number"
+                    disabled="disabled"
+                    min="0"
+                    max ="0"
+                >
+            </p>
+        </div>
+    </form>
 
+    <button type="button" name="button" class="button end_turn">
+        End Turn
+    </button>
+    
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- endbower -->

@@ -6,7 +6,7 @@ import {getEmptySpace} from './spaces';
 export function wishToSendFleet(state, planet) {
     let planetBaseFleet = 10;
     let minGrow = 2;
-    let planetMinFleet = planetBaseFleet + (state.turn * minGrow);
+    let planetMinFleet = planetBaseFleet + (state.turns.length * minGrow);
     return planet.ships > planetMinFleet;
 }
 
@@ -23,8 +23,8 @@ export function isOccupiedByComputer(planet) {
 }
 
 export function growPlanet(planet) {
-    planet.ships += planet.production;
-    return planet;
+    planet.ships += parseInt(planet.production, 10);
+    console.log(planet.name, planet.ships);
 }
 
 export function getEmptyPlanet(state) {
