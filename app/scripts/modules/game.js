@@ -1,4 +1,5 @@
 import {logScore} from './utils';
+import {resetFleetForm} from './fleets';
 
 function growPlanets(state, planets) {
     state.planets
@@ -29,6 +30,11 @@ function executeTurn(state, fleets) {
         return fleets.arrive(state, fleet);
     });
     state.fleets = [];
+
+    state.sourcePlanet = null;
+    state.destinyPlanet = null;
+    resetFleetForm();
+
 }
 
 export function endTurn(state, planets, fleets) {

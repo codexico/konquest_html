@@ -29,6 +29,9 @@ function showDestinyData(planet, occupier) {
 
     destinyName.innerHTML = planet.name;
 
+    destinyShips.innerHTML = '';
+    destinyProduction.innerHTML = '';
+
     if (occupier) {
         destinyShips.innerHTML = planet.ships || 0;
         destinyProduction.innerHTML = planet.production;
@@ -61,8 +64,8 @@ function setSourcePlanet(state, planet) {
 export function selectSourcePlanet(state, planet) {
     if (state.sourcePlanet) {
         if (planet === state.sourcePlanet) {
-            state.sourcePlanet = undefined;
-            state.destinyPlanet = undefined;
+            state.sourcePlanet = null;
+            state.destinyPlanet = null;
             resetFleetForm();
         } else {
             selectDestinyPlanet(state, planet);
@@ -99,14 +102,6 @@ function konquerPlanet(state, fleet) {
     planet.space.classList.add(fleet.player.name);
     planet.space.classList.add(fleet.player.type);
     planet.player = fleetPlayer;
-
-    if (fleet.player.type === 'human') {
-        planet.space.addEventListener('click', function onClickPlanet(e) {
-            let clickedPlanet = e.target.planet || e.target.offsetParent.planet;
-            console.log('clickedPlanet', clickedPlanet);
-            selectSourcePlanet(state, clickedPlanet);
-        });
-    }
 
     oldPlayer.planets.pop(planet);
     fleetPlayer.planets.push(planet);

@@ -37,8 +37,8 @@ function endTurn() {
 
 function onSubmitFleetForm(e) {
     fleets.createHumanFleet(e, state);
-    state.sourcePlanet = undefined;
-    state.destinyPlanet = undefined;
+    state.sourcePlanet = null;
+    state.destinyPlanet = null;
 
     fleets.resetFleetForm();
 }
