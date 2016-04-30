@@ -1,7 +1,7 @@
 // bower:scss
 // endbower
 
-$spaceW: 28;
+$spaceW: 36;
 $planetW: $spaceW * 0.7;
 $spaceBorderW: 1;
 
@@ -57,17 +57,19 @@ body {
     left: 0;
 
     color: #fff;
+    text-shadow: 1px 1px 2px black;
 
-    font-size: 9px;
+    font-size: 14px;
 }
 .planet-ships {
     position: absolute;
-    bottom: 0;
     right: 0;
+    bottom: 0;
 
     color: #fff;
+    text-shadow: 1px 1px 2px black;
 
-    font-size: 9px;
+    font-size: 14px;
 }
 
 
