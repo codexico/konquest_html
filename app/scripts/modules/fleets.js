@@ -1,13 +1,16 @@
 import {chooseDestiny, isOccupier} from './utils';
 
-export function createHumanFleet(e, state) {
-    e.preventDefault();
+function updateShips(planet, shipsNum) {
+    planet.ships = shipsNum;
+    planet.shipsEl.innerHTML = shipsNum;
+}
 
+export function createHumanFleet(e, state) {
     let fleet = {};
     fleet.ships = parseInt(e.target['fleet-size'].value, 10);
+    updateShips(state.sourcePlanet, state.sourcePlanet.ships - fleet.ships);
     fleet.destiny = state.destinyPlanet;
     fleet.player = state.sourcePlanet.player;
-    state.sourcePlanet.ships -= fleet.ships;
     state.fleets.push(fleet);
 }
 
@@ -85,7 +88,7 @@ function generateComputerFleet(state, planet) {
 
 export function createComputerFleet(state, planet) {
     let fleet = generateComputerFleet(state, planet);
-    planet.ships -= fleet.ships;
+    updateShips(planet, planet.ships - fleet.ships);
     state.fleets.push(fleet);
     return fleet;
 }
@@ -106,7 +109,7 @@ function konquerPlanet(state, fleet) {
     oldPlayer.planets.pop(planet);
     fleetPlayer.planets.push(planet);
 
-    planet.ships = fleet.ships;
+    updateShips(planet, fleet.ships);
 }
 
 function occupyPlanet(state, fleet) {
@@ -118,7 +121,8 @@ function occupyPlanet(state, fleet) {
     state.planets[planetIndex].space.classList.add(fleet.player.type);
     state.planets[planetIndex].player = state.players[fleetPlayerIndex];
     state.players[fleetPlayerIndex].planets.push(state.planets[planetIndex]);
-    state.planets[planetIndex].ships = fleet.ships;
+
+    updateShips(state.planets[planetIndex], fleet.ships);
 }
 
 function battle(state, fleet) {
@@ -128,7 +132,7 @@ function battle(state, fleet) {
     let planet = state.planets[planetIndex];
 
     if (planet.ships >= fleet.ships) { // defense win
-        planet.ships -= fleet.ships;
+        updateShips(planet, planet.ships - fleet.ships);
     } else { // attack win
         fleet.ships -= planet.ships;
         konquerPlanet(state, fleet);
@@ -136,8 +140,7 @@ function battle(state, fleet) {
 }
 
 function reinforcements(planet, ships) {
-    // console.log('reinforcements', planet, ships);
-    planet.ships += ships;
+    updateShips(planet, planet.ships + ships);
 }
 
 export function arrive(state, fleet) {

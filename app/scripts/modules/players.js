@@ -4,6 +4,7 @@ function createLife(options, planet, player) {
     planet.space.classList.add(player.name);
     planet.space.classList.add(player.type);
     planet.ships = options.ships;
+    planet.shipsEl.innerHTML = planet.ships;
     planet.production = options.production; // override random production
     planet.player = player;
     player.planets = [];

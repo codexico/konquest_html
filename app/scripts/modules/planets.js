@@ -24,6 +24,7 @@ export function isOccupiedByComputer(planet) {
 
 export function growPlanet(planet) {
     planet.ships += parseInt(planet.production, 10);
+    planet.shipsEl.innerHTML = planet.ships;
 }
 
 export function getEmptyPlanet(state) {
@@ -53,6 +54,11 @@ function createPlanet(options, planetName) {
     planetEl.production = calcRandomProduction(options);
     planetEl.className = 'planet';
     planetEl = addPlanetName(planetName, planetEl);
+
+    let shipsEl = document.createElement('span');
+    shipsEl.className = 'planet-ships';
+    planetEl.shipsEl = shipsEl;
+    planetEl.appendChild(shipsEl);
 
     return planetEl;
 }

@@ -36,11 +36,14 @@ function endTurn() {
 }
 
 function onSubmitFleetForm(e) {
-    fleets.createHumanFleet(e, state);
-    state.sourcePlanet = null;
-    state.destinyPlanet = null;
+    e.preventDefault();
+    if (e.target['fleet-size'].value) {
+        fleets.createHumanFleet(e, state);
+        state.sourcePlanet = null;
+        state.destinyPlanet = null;
 
-    fleets.resetFleetForm();
+        fleets.resetFleetForm();
+    }
 }
 
 function initListeners() {
