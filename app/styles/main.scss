@@ -46,6 +46,9 @@ $spaceBorderW: 1;
     background-color: #234ad6;
 }
 .planet-name {
+    position: absolute;
+    top: 0;
+    left: 0;
     color: #fff;
     font-size: 9px;
 }
