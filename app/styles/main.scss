@@ -1,57 +1,67 @@
 // bower:scss
 // endbower
 
-body {
-    background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #333;
-}
-
 $spaceW: 28;
 $planetW: $spaceW * 0.7;
 $spaceBorderW: 1;
 
+body {
+    color: #333;
+    background: #fafafa;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
 .universe {
-    background-color: #000;
     display: block;
+
+    background-color: #000;
 }
 .singularity {
     display: block;
+    overflow: hidden;
+
     width: $spaceW + ($spaceBorderW * 2) + px;
     height: 0;
-    overflow: hidden;
 }
+
+
 .space {
     position: relative;
+
     display: inline-block;
+
     width: $spaceW + px;
     height: $spaceW + px;
 
-    border: ($spaceBorderW + px) solid #333;
-
+    text-align: center;
     vertical-align: middle;
 
+    border: ($spaceBorderW + px) solid #333;
     background-color: #000;
-    text-align: center;
 }
 .planet {
     display: inline-block;
+
     width: $planetW + px;
     height: $planetW + px;
-
     margin-top: ($spaceW - $planetW)/2 + px;
 
     border-radius: $planetW + px;
-
     background-color: #234ad6;
 }
 .planet-name {
     position: absolute;
     top: 0;
     left: 0;
+
     color: #fff;
+
     font-size: 9px;
 }
+
+
 .player_0 {
     background-color: #f00;
 }
