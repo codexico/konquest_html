@@ -5,6 +5,19 @@ $spaceW: 36;
 $planetW: $spaceW * 0.7;
 $spaceBorderW: 1;
 
+@font-face {
+    font-family: '52_sphereoidsregular';
+    font-weight: normal;
+    font-style: normal;
+
+    src: url('fonts/52_sphereoids-webfont.eot');
+    src: url('fonts/52_sphereoids-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/52_sphereoids-webfont.woff2') format('woff2'),
+         url('fonts/52_sphereoids-webfont.woff') format('woff'),
+         url('fonts/52_sphereoids-webfont.ttf') format('truetype'),
+         url('fonts/52_sphereoids-webfont.svg#52_sphereoidsregular') format('svg');
+}
+
 body {
     color: #333;
     background: #fafafa;
@@ -44,12 +57,16 @@ body {
 .planet {
     display: inline-block;
 
-    width: $planetW + px;
-    height: $planetW + px;
     margin-top: ($spaceW - $planetW)/2 + px;
-
+}
+.planet-body {
+    color: brown;
     border-radius: $planetW + px;
     background-color: #234ad6;
+
+    font-family: "52_sphereoidsregular";
+    font-size: $planetW + px;
+    font-weight: bold;
 }
 .planet-name {
     position: absolute;

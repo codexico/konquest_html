@@ -1,4 +1,4 @@
-import {calcRandomProduction, isOccupier} from './utils';
+import {calcRandomProduction, getRandomLetter, isOccupier} from './utils';
 import {selectDestinyPlanet, selectSourcePlanet} from './fleets';
 import {getEmptySpace} from './spaces';
 
@@ -47,18 +47,29 @@ function addPlanetName(planetName, planetEl) {
     return planetEl;
 }
 
+function addPlanetBody(planetEl) {
+    let bodyEl = document.createElement('span');
+    bodyEl.className = 'planet-body';
+    planetEl.bodyEl = bodyEl;
+    planetEl.bodyEl.innerHTML = getRandomLetter();
+    planetEl.appendChild(bodyEl);
+}
+
 // todo: kill percent
 function createPlanet(options, planetName) {
     let planetEl = document.createElement('span');
 
+    addPlanetBody(planetEl);
     planetEl.production = calcRandomProduction(options);
+
     planetEl.className = 'planet';
-    planetEl = addPlanetName(planetName, planetEl);
+    addPlanetName(planetName, planetEl);
 
     let shipsEl = document.createElement('span');
     shipsEl.className = 'planet-ships';
     planetEl.shipsEl = shipsEl;
     planetEl.appendChild(shipsEl);
+
 
     return planetEl;
 }
