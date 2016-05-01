@@ -60,3 +60,8 @@ export function logScore(state) {
 export function isOccupier(planet, player) {
     return planet.player === player;
 }
+
+export function getRandomLetter() {
+    let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    return letters.charAt(Math.floor(Math.random() * letters.length));
+}
