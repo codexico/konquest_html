@@ -1,3 +1,5 @@
+/* global randomColor */
+
 import {calcRandomProduction, getRandomLetter, isOccupier} from './utils';
 import {selectDestinyPlanet, selectSourcePlanet} from './fleets';
 import {getEmptySpace} from './spaces';
@@ -52,6 +54,13 @@ function addPlanetBody(planetEl) {
     bodyEl.className = 'planet-body';
     planetEl.bodyEl = bodyEl;
     planetEl.bodyEl.innerHTML = getRandomLetter();
+    planetEl.bodyEl.style.backgroundColor = randomColor({
+        luminosity: 'bright'
+    });
+    planetEl.bodyEl.style.color = randomColor({
+        luminosity: 'dark'
+    });
+
     planetEl.appendChild(bodyEl);
 }
 
