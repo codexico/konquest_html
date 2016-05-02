@@ -113,6 +113,12 @@ function getNumberOfPlanets(options, allSpaces) {
     return numberOfPlanets;
 }
 
+function getPlanetName(i) {
+    let firstLetter = 'A';
+    let charCode = firstLetter.charCodeAt(0);
+    return String.fromCharCode(charCode + i);
+}
+
 export function addPlanets(options, state, allSpaces) {
     let numberOfPlanets = getNumberOfPlanets(options, allSpaces);
     let planets = [];
@@ -127,7 +133,8 @@ export function addPlanets(options, state, allSpaces) {
     }
 
     for (let i = 0; i < numberOfPlanets; i++) {
-        let planetName = 'p' + i;
+        let planetName = getPlanetName(i);
+
         let planet = createPlanet(options, planetName);
 
         planet.space = locatePlanet(allSpaces, planet);
