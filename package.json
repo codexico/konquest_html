@@ -44,5 +44,28 @@
       "es6": true,
       "mocha": true
     }
-  }
+  },
+  "name": "konquest",
+  "description": "A html version of Konquest, the KDE version of Gnu-Lactic",
+  "version": "1.0.0",
+  "main": "Gruntfile.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codexico/konquest_html.git"
+  },
+  "keywords": [
+    "konquest",
+    "game",
+    "strategy"
+  ],
+  "author": "codexico",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/codexico/konquest_html/issues"
+  },
+  "homepage": "https://github.com/codexico/konquest_html#readme"
 }
