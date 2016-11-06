@@ -3,7 +3,8 @@ import Space from '../../components/Space/Space'
 
 class Galaxy extends Component {
   renderSpace() {
-    return <Space />;
+    const hasPlanet = (Math.random() > 0.5) ? true : false;
+    return <Space hasPlanet={hasPlanet} />;
   }
   render() {
     return (

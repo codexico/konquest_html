@@ -20,6 +20,11 @@ it('is button', () => {
 });
 
 it('renders Planet', () => {
-    const wrapper = mount((<Space />));
+    const wrapper = mount((<Space hasPlanet={true} />));
     expect(wrapper.contains(<Planet />)).toEqual(true);
+});
+
+it('is empty', () => {
+    const wrapper = mount((<Space hasPlanet={false} />));
+    expect(wrapper.contains(<Planet />)).toEqual(false);
 });
