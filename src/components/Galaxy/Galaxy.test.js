@@ -9,8 +9,9 @@ it('renders without crashing', () => {
 });
 
 it('has spaces', () => {
-    const wrapper = mount((<Galaxy />));
-    expect(wrapper.find('.space').length).toEqual(16);
+    const wrapper = mount((<Galaxy rows={3} cols={4} />));
+    expect(wrapper.find('.galaxy_row').length).toEqual(3);
+    expect(wrapper.find('.space').length).toEqual(12);
 });
 
 it('should have rows x cols spaces', () => {
