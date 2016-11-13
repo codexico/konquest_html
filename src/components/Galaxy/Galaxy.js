@@ -31,27 +31,23 @@ class Galaxy extends Component {
     return <Space planet={planet} key={i} x={x} y={y} />;
   }
 
-  renderGalaxy() {
-    let galaxy = [];
-    let rowSpaces = [];
+  renderGalaxy(spaces) {
     let index = 0;
-    for (var y = 0; y < this.props.rows; y++) {
-      rowSpaces = [];
-      for (var x = 0; x < this.props.cols; x++) {
 
-        rowSpaces.push(this.renderSpace(x, y, index++));
-      }
-      galaxy.push(
-        <div className="galaxy_row" key={y}>{rowSpaces}</div>
-      );
-    }
-    return galaxy;
+    return spaces.map((row, y) => {
+        const rowSpaces = row.map((space, x) => {
+            return this.renderSpace(x, y, index++);
+        });
+        return (
+          <div className="galaxy_row" key={y}>{rowSpaces}</div>
+        );
+    });
   }
 
   render() {
     return (
       <div className="galaxy">
-        {this.renderGalaxy()}
+        {this.renderGalaxy(this.props.spaces)}
       </div>
     );
   }

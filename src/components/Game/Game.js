@@ -16,6 +16,7 @@ function createUniverse(options) {
 class Game extends Component {
   constructor(props) {
     super(props);
+
     this.defaults = {
       rows: 14,
       cols: 10,
@@ -24,19 +25,19 @@ class Game extends Component {
       ships: 10,
       production: 10
     };
-    this.state = {
-      planets: []
-    };
 
-    createUniverse(this.defaults);
+    const universe = createUniverse(this.defaults);
+    this.state = {
+        spaces: universe.spaces,
+        planets: universe.planets
+    };
   }
 
   render() {
     return (
       <div className="game">
         <Galaxy
-          rows={this.defaults.rows}
-          cols={this.defaults.cols}
+          spaces={this.state.spaces}
           planets={this.state.planets}
           />
         <div className="order">
