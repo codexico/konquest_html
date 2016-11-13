@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import Planet from '../Planet/Planet'
 
 class Space extends Component {
-  getPlanet(hasPlanet) {
-    return hasPlanet ? <Planet /> : null;
+  getPlanet() {
+    return <Planet />;
   }
 
   render() {
     return (
       <button className="space" >
-        {this.getPlanet(this.props.hasPlanet)}
+        {this.props.hasPlanet && this.getPlanet()}
       </button>
     );
   }
