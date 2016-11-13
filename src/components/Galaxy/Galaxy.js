@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Space from '../Space/Space';
 import {createSpace} from '../Space/Space';
-import Planet from '../Planet/Planet';
-
+import Planet, { createPlanets } from '../Planet/Planet';
 
 function createGalaxySpaces(rows, cols) {
   let galaxy = [];
@@ -17,6 +16,17 @@ function createGalaxySpaces(rows, cols) {
 
     galaxy.push(rowSpaces);
   }
+  return galaxy;
+}
+
+function createGalaxy(options) {
+  const galaxy = {};
+  const numPlanets = Math.floor(options.rows * options.cols * options.density);
+
+  galaxy.spaces = createGalaxySpaces(options.rows, options.cols);
+
+  galaxy.planets = createPlanets(numPlanets, options.ships, options.production);
+
   return galaxy;
 }
 
@@ -54,4 +64,4 @@ class Galaxy extends Component {
 }
 
 export default Galaxy;
-export { createGalaxySpaces };
+export { createGalaxy, createGalaxySpaces };

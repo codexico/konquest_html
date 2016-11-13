@@ -1,17 +1,5 @@
 import React, { Component } from 'react';
-import Galaxy, { createGalaxySpaces } from '../Galaxy/Galaxy';
-import { createPlanets } from '../Planet/Planet';
-
-function createUniverse(options) {
-  const galaxy = {};
-  const numPlanets = Math.floor(options.rows * options.cols * options.density);
-
-  galaxy.spaces = createGalaxySpaces(options.rows, options.cols);
-
-  galaxy.planets = createPlanets(numPlanets, options.ships, options.production);
-
-  return galaxy;
-}
+import Galaxy, { createGalaxy } from '../Galaxy/Galaxy';
 
 class Game extends Component {
   constructor(props) {
@@ -26,10 +14,10 @@ class Game extends Component {
       production: 10
     };
 
-    const universe = createUniverse(this.defaults);
+    const galaxy = createGalaxy(this.defaults);
     this.state = {
-        spaces: universe.spaces,
-        planets: universe.planets
+        spaces: galaxy.spaces,
+        planets: galaxy.planets
     };
   }
 
