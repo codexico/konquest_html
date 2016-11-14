@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Space from '../Space/Space';
-import {createSpace} from '../Space/Space';
-import { createPlanets } from '../Planet/Planet';
+import { createSpace } from '../Space/Space';
+import { createPlanets, getEmptyPlanet } from '../Planet/Planet';
+import { createLife } from '../Player/Player';
 
 function getEmptySpace(spaces) {
     const row = (Math.floor(Math.random() * spaces.length));
@@ -35,13 +36,22 @@ function createGalaxy(options) {
 
   const spaces = createGalaxySpaces(options.rows, options.cols);
   const planets = createPlanets(numPlanets, options.ships, options.production);
+  const players = createLife(options.players, planets);
 
+  // place players on planets
+  players.forEach((player) => {
+      const planet = getEmptyPlanet(planets);
+      planet.player = player;
+  });
+
+  // place planets on spaces
   planets.forEach((planet) => {
       const {row, col} = getEmptySpace(spaces);
       spaces[row][col].planet = planet;
-  })
+  });
 
-  return {spaces, planets};
+
+  return {spaces, planets, players};
 }
 
 class Galaxy extends Component {

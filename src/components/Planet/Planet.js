@@ -21,6 +21,17 @@ function createPlanets(numPlanets, ships, production) {
   return planets;
 }
 
+function getEmptyPlanet(planets) {
+    const planetIndex = (Math.floor(Math.random() * planets.length));
+
+    if (!planets[planetIndex].player) {
+        return planets[planetIndex];
+    }
+    // try again
+    return getEmptyPlanet(planets);
+}
+
+
 class Planet extends Component {
   render() {
     const planetStyle = {
@@ -40,4 +51,4 @@ class Planet extends Component {
 }
 
 export default Planet;
-export { createPlanets };
+export { createPlanets, getEmptyPlanet };

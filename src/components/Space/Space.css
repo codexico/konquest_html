@@ -1,14 +1,20 @@
 .space {
-  background: #000;
-  border: 1px solid #999;
+  position: relative;
+
   float: left;
-  line-height: 34px;
-  height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
+
   width: 34px;
+  height: 34px;
+  margin-top: -1px;
+  margin-right: -1px;
+  padding: 0;
+
+  text-align: center;
+
+  border: 1px solid #999;
+  background: #000;
+
+  line-height: 34px;
 }
 
 .space:focus {
