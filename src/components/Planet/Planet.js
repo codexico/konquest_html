@@ -20,6 +20,7 @@ class Planet extends Component {
               style={planetStyle}
               >{getRandomLetter()}</span>
           <span className="planet_name">{this.props.name}</span>
+          <span className="planet_ships">{this.props.ships}</span>
       </span>
     );
   }

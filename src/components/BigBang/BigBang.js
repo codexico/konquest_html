@@ -93,6 +93,7 @@ function BigBang(options) {
   players.forEach((player) => {
       const planet = getEmptyPlanet(planets);
       planet.player = player;
+      planet.ships = options.ships;
   });
 
   // place planets on spaces
