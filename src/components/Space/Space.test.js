@@ -20,7 +20,7 @@ it('is button', () => {
 });
 
 it('renders Planet', () => {
-    const wrapper = mount((<Space hasPlanet={true} />));
+    const wrapper = mount((<Space planet />));
     expect(wrapper.contains(<Planet />)).toEqual(true);
 });
 

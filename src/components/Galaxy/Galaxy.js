@@ -31,18 +31,17 @@ function createGalaxySpaces(rows, cols) {
 }
 
 function createGalaxy(options) {
-  const galaxy = {};
   const numPlanets = Math.floor(options.rows * options.cols * options.density);
 
-  galaxy.spaces = createGalaxySpaces(options.rows, options.cols);
-  galaxy.planets = createPlanets(numPlanets, options.ships, options.production);
+  const spaces = createGalaxySpaces(options.rows, options.cols);
+  const planets = createPlanets(numPlanets, options.ships, options.production);
 
-  galaxy.planets.forEach((planet) => {
-      const {row, col} = getEmptySpace(galaxy.spaces);
-      galaxy.spaces[row][col].planet = planet;
+  planets.forEach((planet) => {
+      const {row, col} = getEmptySpace(spaces);
+      spaces[row][col].planet = planet;
   })
 
-  return galaxy;
+  return {spaces, planets};
 }
 
 class Galaxy extends Component {

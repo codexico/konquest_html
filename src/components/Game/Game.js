@@ -14,11 +14,8 @@ class Game extends Component {
       production: 10
     };
 
-    const galaxy = createGalaxy(this.defaults);
-    this.state = {
-        spaces: galaxy.spaces,
-        planets: galaxy.planets
-    };
+    const {spaces, planets} = createGalaxy(this.defaults);
+    this.state = {spaces, planets};
   }
 
   render() {
