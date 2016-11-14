@@ -1,17 +1,6 @@
 import React, { Component } from 'react';
 import './Player.css';
 
-function createLife(numPlayers) {
-    const players = [];
-    for (var i = 0; i < numPlayers; i++) {
-        const player = {};
-        player.name = `Player_${i}`;
-        player.order = i;
-        players.push(player);
-    }
-    return players;
-}
-
 class Player extends Component {
     playerStyles() {
         const colors = [
@@ -36,4 +25,3 @@ class Player extends Component {
 }
 
 export default Player;
-export { createLife };

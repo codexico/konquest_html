@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Galaxy, { createGalaxy } from '../Galaxy/Galaxy';
+import BigBang from '../BigBang/BigBang';
+import Galaxy from '../Galaxy/Galaxy';
+
 
 class Game extends Component {
   constructor(props) {
@@ -14,7 +16,7 @@ class Game extends Component {
       production: 10
     };
 
-    const {spaces, planets, players} = createGalaxy(this.defaults);
+    const {spaces, planets, players} = BigBang(this.defaults);
 
     this.state = {spaces, planets, players};
   }

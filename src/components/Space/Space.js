@@ -3,10 +3,6 @@ import './Space.css';
 import Planet from '../Planet/Planet';
 import Player from '../Player/Player';
 
-function createSpace(x, y, i) {
-    return {x, y, i};
-}
-
 class Space extends Component {
     getPlanet(planet) {
         if (!planet) {
@@ -32,4 +28,3 @@ class Space extends Component {
 }
 
 export default Space;
-export { createSpace };
