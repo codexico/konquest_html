@@ -3,6 +3,24 @@ import Space from '../Space/Space';
 import {createSpace} from '../Space/Space';
 import Planet, { createPlanets } from '../Planet/Planet';
 
+function getEmptySpace(spaces) {
+    const row = (Math.floor(Math.random() * spaces.length));
+    const col = (Math.floor(Math.random() * spaces[0].length));
+
+    if (!spaces[row][col].planet) {
+        return {row, col};
+    }
+    // try again
+    return getEmptySpace(spaces);
+}
+
+function locatePlanet(allSpaces, planet) {
+    let space = getEmptySpace(allSpaces);
+    space.appendChild(planet);
+    space.planet = planet;
+    return space;
+}
+
 function createGalaxySpaces(rows, cols) {
   let galaxy = [];
   let rowSpaces = [];
@@ -24,8 +42,12 @@ function createGalaxy(options) {
   const numPlanets = Math.floor(options.rows * options.cols * options.density);
 
   galaxy.spaces = createGalaxySpaces(options.rows, options.cols);
-
   galaxy.planets = createPlanets(numPlanets, options.ships, options.production);
+
+  galaxy.planets.map((planet) => {
+      const {row, col} = getEmptySpace(galaxy.spaces);
+      galaxy.spaces[row][col].planet = planet;
+  })
 
   return galaxy;
 }
