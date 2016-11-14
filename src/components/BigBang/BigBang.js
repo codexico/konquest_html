@@ -49,6 +49,12 @@ function createLife(numPlayers) {
 ///////////
 // Planet
 ///////////
+function getPlanetName(i) {
+    let firstLetter = 'A';
+    let charCode = firstLetter.charCodeAt(0);
+    return String.fromCharCode(charCode + i);
+}
+
 function createPlanet(name, production) {
   return {ships: 0, production, name: name};
 }
@@ -57,7 +63,7 @@ function createPlanets(numPlanets, production) {
   const planets = [];
 
   for (var i = 0; i < numPlanets; i++) {
-    planets.push(createPlanet(i, production));
+    planets.push(createPlanet(getPlanetName(i), production));
   }
 
   return planets;
