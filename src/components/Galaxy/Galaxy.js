@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Space from '../Space/Space';
 import {createSpace} from '../Space/Space';
-import Planet, { createPlanets } from '../Planet/Planet';
+import { createPlanets } from '../Planet/Planet';
 
 function getEmptySpace(spaces) {
     const row = (Math.floor(Math.random() * spaces.length));
@@ -12,13 +12,6 @@ function getEmptySpace(spaces) {
     }
     // try again
     return getEmptySpace(spaces);
-}
-
-function locatePlanet(allSpaces, planet) {
-    let space = getEmptySpace(allSpaces);
-    space.appendChild(planet);
-    space.planet = planet;
-    return space;
 }
 
 function createGalaxySpaces(rows, cols) {
@@ -44,7 +37,7 @@ function createGalaxy(options) {
   galaxy.spaces = createGalaxySpaces(options.rows, options.cols);
   galaxy.planets = createPlanets(numPlanets, options.ships, options.production);
 
-  galaxy.planets.map((planet) => {
+  galaxy.planets.forEach((planet) => {
       const {row, col} = getEmptySpace(galaxy.spaces);
       galaxy.spaces[row][col].planet = planet;
   })
@@ -54,21 +47,18 @@ function createGalaxy(options) {
 
 class Galaxy extends Component {
 
-  getPlanet(x, y, i) {
-    return <Planet key={i} x={x} y={y} />;
-  }
-
-  renderSpace(x, y, i) {
-    const planet = (Math.random() > 0.5) ? this.getPlanet(x, y, i) : null;
-    return <Space planet={planet} key={i} x={x} y={y} />;
+  renderSpace(space) {
+    return (
+        <Space
+            planet={space.planet}
+            key={space.i} x={space.x} y={space.y} />
+    );
   }
 
   renderGalaxy(spaces) {
-    let index = 0;
-
     return spaces.map((row, y) => {
-        const rowSpaces = row.map((space, x) => {
-            return this.renderSpace(x, y, index++);
+        const rowSpaces = row.map((space) => {
+            return this.renderSpace(space);
         });
         return (
           <div className="galaxy_row" key={y}>{rowSpaces}</div>

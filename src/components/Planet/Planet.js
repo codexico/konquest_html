@@ -18,6 +18,7 @@ class Planet extends Component {
   render() {
     return (
       <span className="Planet" >
+          {this.props.name}
       </span>
     );
   }
