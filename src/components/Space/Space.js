@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Space.css';
 import Planet from '../Planet/Planet';
 
 function createSpace(x, y, i) {

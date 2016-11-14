@@ -1,4 +1,11 @@
 import React, { Component } from 'react';
+import './Planet.css';
+import randomColor from 'randomcolor';
+
+function getRandomLetter() {
+    let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    return letters.charAt(Math.floor(Math.random() * letters.length));
+}
 
 function createPlanet(name, ships, production) {
   return {ships, production, name: name};
@@ -16,9 +23,17 @@ function createPlanets(numPlanets, ships, production) {
 
 class Planet extends Component {
   render() {
+    const planetStyle = {
+        color: randomColor({luminosity: 'dark'}),
+        backgroundColor: randomColor({luminosity: 'bright'})
+    };
+
     return (
       <span className="Planet" >
-          {this.props.name}
+          <span className="planet_body"
+              style={planetStyle}
+              >{getRandomLetter()}</span>
+          <span className="planet_name">{this.props.name}</span>
       </span>
     );
   }

@@ -1,0 +1,47 @@
+@font-face {
+    font-family: '52_sphereoidsregular';
+    font-weight: normal;
+    font-style: normal;
+
+    src: url('./fonts/52_sphereoids-webfont.eot');
+    src: url('./fonts/52_sphereoids-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./fonts/52_sphereoids-webfont.woff2') format('woff2'),
+         url('./fonts/52_sphereoids-webfont.woff') format('woff'),
+         url('./fonts/52_sphereoids-webfont.ttf') format('truetype'),
+         url('./fonts/52_sphereoids-webfont.svg#52_sphereoidsregular') format('svg');
+}
+
+.Planet {
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+}
+
+.planet_body {
+    display: flex;
+
+    width: 22px;
+    height: 22px;
+
+    text-align: center;
+
+    border-radius: 22px;
+
+    font-family: "52_sphereoidsregular";
+    font-size: 22px;
+    font-weight: bold;
+
+    align-items: center;
+}
+.planet_name {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    color: #fff;
+    text-shadow: 1px 1px 2px black;
+
+    font-size: 14px;
+}
