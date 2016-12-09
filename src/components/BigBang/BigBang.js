@@ -1,3 +1,7 @@
+import randomColor from 'randomcolor';
+import { growPlanets } from '../Planet/Planet';
+import { clone } from '../../modules/helpers';
+
 ///////////
 // Space
 ///////////
@@ -49,21 +53,41 @@ function createLife(numPlayers) {
 ///////////
 // Planet
 ///////////
+function getRandomLetter() {
+    let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    return letters.charAt(Math.floor(Math.random() * letters.length));
+}
+function getPlanetBody() {
+    return getRandomLetter();
+}
+function getPlanetStyle() {
+    return {
+        color: randomColor({luminosity: 'dark'}),
+        backgroundColor: randomColor({luminosity: 'bright'})
+    };
+
+}
 function getPlanetName(i) {
     let firstLetter = 'A';
     let charCode = firstLetter.charCodeAt(0);
     return String.fromCharCode(charCode + i);
 }
 
-function createPlanet(name, production) {
-  return {ships: 0, production, name: name};
+function createPlanet(i, production) {
+  return {
+      ships: 0,
+      production,
+      name: getPlanetName(i),
+      style: getPlanetStyle(),
+      body: getPlanetBody()
+  };
 }
 
 function createPlanets(numPlanets, production) {
   const planets = [];
 
   for (var i = 0; i < numPlanets; i++) {
-    planets.push(createPlanet(getPlanetName(i), production));
+    planets.push(createPlanet(i, production));
   }
 
   return planets;
@@ -93,7 +117,7 @@ function BigBang(options) {
   players.forEach((player) => {
       const planet = getEmptyPlanet(planets);
       planet.player = player;
-      planet.ships = options.ships;
+      planet.ships = options.production;
   });
 
   // place planets on spaces
