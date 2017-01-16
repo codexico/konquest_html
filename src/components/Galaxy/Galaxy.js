@@ -11,8 +11,8 @@ class Galaxy extends Component {
     );
   }
 
-  renderGalaxy(spaces) {
-    return spaces.map((row, y) => {
+  renderGalaxy(galaxy) {
+    return galaxy.spaces.map((row, y) => {
         const rowSpaces = row.map((space) => {
             return this.renderSpace(space);
         });
@@ -25,7 +25,7 @@ class Galaxy extends Component {
   render() {
     return (
       <div className="galaxy">
-        {this.renderGalaxy(this.props.spaces)}
+        {this.renderGalaxy(this.props.galaxy)}
       </div>
     );
   }

@@ -6,9 +6,9 @@ import { createComputerFleets } from '../Player/Player';
 import { clone } from '../../modules/helpers';
 
 
-function initTurn(planets, turn) {
-    planets = growPlanets(planets);
-    const fleets = createComputerFleets(planets, turn);
+function initTurn(originalPlanets, turn) {
+    originalPlanets = growPlanets(originalPlanets);
+    const {planets, fleets} = createComputerFleets(originalPlanets, turn);
     return {planets, fleets};
 }
 
@@ -27,12 +27,12 @@ class Game extends Component {
 
         const {spaces, planets, players} = BigBang(this.defaults);
         const fleets = [];
-
-        this.history = [{spaces, planets, players, fleets}];
+        const galaxy = {spaces, planets, players, fleets};
+        this.history = [galaxy];
 
         this.state = {
             turn: 0,
-            spaces, planets, players, fleets
+            galaxy
         };
     }
 
@@ -41,6 +41,7 @@ class Game extends Component {
         // score()
 
         const current = clone(this.history[this.history.length - 1]);
+        // console.log(current);
         const {planets, fleets} = initTurn(current.planets, this.state.turn);
 
         current.planets = planets;
@@ -50,8 +51,7 @@ class Game extends Component {
 
         this.setState({
             turn: this.history.length,
-            planets: current.planets,
-            fleets: current.fleets
+            galaxy: current
         });
     }
 
@@ -59,8 +59,7 @@ class Game extends Component {
         return (
             <div className="game">
                 <Galaxy
-                    spaces={this.state.spaces}
-                    planets={this.state.planets}
+                    galaxy={this.state.galaxy}
                     />
                 <div className="order">
                 </div>

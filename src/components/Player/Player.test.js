@@ -39,7 +39,7 @@ it('do not send fleet even with enough ships', () => {
 
 it('should return the next item', () => {
     const planets = ['a', 'b'];
-    expect(test.chooseDestiny(planets, 'a')).toEqual('b');
+    expect(test.chooseDestiny(planets, 'a')).toBe('b');
 });
 
 it('create fleet', () => {
@@ -47,9 +47,8 @@ it('create fleet', () => {
         ships: 10,
         player: 'Player_1'
     };
-    const fleet = test.createComputerFleet(planet, 'a');
-    console.log(planet.ships);
-    expect(fleet.destiny).toEqual('a');
+    const {fleet} = test.createComputerFleet(planet, 'a');
+    expect(fleet.destiny).toBe('a');
     expect(fleet.ships).toBeLessThan(planet.ships);
     expect(fleet.player).toEqual(planet.player);
     // expect(planet).toEqual(planet.player);

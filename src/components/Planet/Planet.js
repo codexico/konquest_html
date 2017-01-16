@@ -6,11 +6,16 @@ function isOccupied(planet) {
     return planet.player;
 }
 
+function growPlanet(planet) {
+    return planet.ships + planet.production;
+}
+
 function growPlanets(planets) {
     return planets
-    .filter(isOccupied)
     .map((planet) => {
-        planet.ships = planet.ships + planet.production;
+        if (isOccupied(planet)) {
+            planet.ships = growPlanet(planet);
+        }
         return planet;
     });
 }

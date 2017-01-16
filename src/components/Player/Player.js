@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Player.css';
 import { isOccupied } from '../Planet/Planet';
-import { nextArrayItem, random } from '../../modules/helpers';
+import { nextArrayItem, random, clone } from '../../modules/helpers';
 
 function chooseDestiny(planets, planet) {
     // todo: more and better algorithms
@@ -11,11 +11,11 @@ function chooseDestiny(planets, planet) {
 
 function createComputerFleet(planet, destiny) {
     const fleet = {};
-    fleet.ships = Math.floor(Math.random() * planet.ships);
+    const planetClone = clone(planet);
+    fleet.ships = Math.floor(Math.random() * planetClone.ships);
     fleet.destiny = destiny;
-    fleet.player = planet.player;
-    planet.ships = planet.ships - fleet.ships;
-    return fleet;
+    fleet.player = planetClone.player;
+    return {planetClone, fleet};
 }
 
 // todo: better and others algorithms
@@ -31,15 +31,19 @@ function wishToSendFleet(ships, turn, random) {
     return false;
 }
 
-function createComputerFleets(planets, turn) {
-    return planets
-    .filter(isOccupied)
-    .filter((planet) => {
-        return wishToSendFleet(planet.ships, turn, random);
-    })
+function createComputerFleets(originalPlanets, turn) {
+    const fleets = [];
+    const planets = originalPlanets
     .map((planet) => {
-        return createComputerFleet(planet, chooseDestiny(planets, planet));
+        if (isOccupied(planet) && wishToSendFleet(planet.ships, turn, random)) {
+            const fleet = createComputerFleet(planet, chooseDestiny(originalPlanets, planet));
+            fleets.push(fleet);
+            planet.ships = planet.ships - fleet.ships;
+        }
+        return planet;
     });
+    console.log(planets);
+    return {planets, fleets};
 }
 
 class Player extends Component {
